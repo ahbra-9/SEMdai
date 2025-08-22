@@ -2,41 +2,31 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "SEMdai",
+    "title": "教育測定学研究演習II",
     "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "text": "はじめに\nこの資料は，東北大学大学院教育学研究科2025年度集中講義「教育測定学研究演習II」のためのものです。\n\nオリエンテーション\nRと測定論の基礎1\nRと測定論の基礎2\n回帰分析1\n回帰分析2\n回帰分析の演習\n因子分析1\n因子分析2\n因子分析の演習\n測定の信頼性\nSEM1\nSEM2\nSEM3\nSEMの演習\nまとめ",
     "crumbs": [
-      "Preface"
+      "はじめに"
     ]
   },
   {
     "objectID": "intro.html",
     "href": "intro.html",
-    "title": "1  Introduction",
+    "title": "1  オリエンテーション",
     "section": "",
-    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "text": "みなさんの研究上の興味や関心を教えてください。",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>オリエンテーション</span>"
     ]
   },
   {
     "objectID": "summary.html",
     "href": "summary.html",
-    "title": "2  Summary",
+    "title": "3  Summary",
     "section": "",
     "text": "In summary, this book has no content whatsoever.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Summary</span>"
-    ]
-  },
-  {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
-    "crumbs": [
-      "References"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Summary</span>"
     ]
   }
 ]

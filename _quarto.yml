@@ -1,0 +1,28 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "教育測定学研究演習II"
+  subtitle: "東北大学大学院教育学研究科"
+  author: "担当：中村健太郎"
+  date: "8/25/2025"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - path1.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+  pdf:
+    documentclass: scrreprt
+
+
+
