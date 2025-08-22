@@ -73,10 +73,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ffffa96520c6cf7ec6bfd4297e4347f0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-485d01fc63b59abcd3ee1bf1e8e2748d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-2bcba6c496c817d1f95d9bfa6227460e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -217,7 +217,14 @@ window.Quarto = {
   <li><a href="#トレーシングルール" id="toc-トレーシングルール" class="nav-link" data-scroll-target="#トレーシングルール"><span class="header-section-number">2.4</span> トレーシングルール</a></li>
   <li><a href="#パス係数の値" id="toc-パス係数の値" class="nav-link" data-scroll-target="#パス係数の値"><span class="header-section-number">2.5</span> パス係数の値</a></li>
   <li><a href="#決定係数" id="toc-決定係数" class="nav-link" data-scroll-target="#決定係数"><span class="header-section-number">2.6</span> 決定係数</a></li>
-  <li><a href="#r-による分析" id="toc-r-による分析" class="nav-link" data-scroll-target="#r-による分析"><span class="header-section-number">2.7</span> <em>R</em> による分析</a></li>
+  <li><a href="#間接効果" id="toc-間接効果" class="nav-link" data-scroll-target="#間接効果"><span class="header-section-number">2.7</span> 間接効果</a></li>
+  <li><a href="#r-による分析" id="toc-r-による分析" class="nav-link" data-scroll-target="#r-による分析"><span class="header-section-number">2.8</span> <strong>R</strong> による分析</a>
+  <ul class="collapse">
+  <li><a href="#相関係数行列の入力" id="toc-相関係数行列の入力" class="nav-link" data-scroll-target="#相関係数行列の入力"><span class="header-section-number">2.8.1</span> 相関係数行列の入力</a></li>
+  <li><a href="#モデル式" id="toc-モデル式" class="nav-link" data-scroll-target="#モデル式"><span class="header-section-number">2.8.2</span> モデル式</a></li>
+  <li><a href="#分析の実行" id="toc-分析の実行" class="nav-link" data-scroll-target="#分析の実行"><span class="header-section-number">2.8.3</span> 分析の実行</a></li>
+  <li><a href="#実習" id="toc-実習" class="nav-link" data-scroll-target="#実習"><span class="header-section-number">2.8.4</span> 実習</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -298,16 +305,19 @@ x_3 と y \ の相関 = c + (f \times b) + (e\times a)
 0.78 = a + (0.66 \times b) + (0.68 \times c)\\
 0.53 = b + (0.66 \times a) + (0.60 \times c)\\
 0.50 = c + (0.60 \times b) + (0.68 \times a)
-\end{align*}\]</span> となり，<span class="math inline">\(a=0.80\)</span>，<span class="math inline">\(b=0.05\)</span>，<span class="math inline">\(c=-0.07\)</span>を得ます。</p>
+\end{align*}\]</span> となり，<span class="math inline">\(a=0.80\)</span>，<span class="math inline">\(b=0.05\)</span>，<span class="math inline">\(c=-0.07\)</span> を得ます（以下のコード参照）。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vec_r <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.78</span>, <span class="fl">0.53</span>, <span class="fl">0.50</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mat_c <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="fl">1.00</span>, <span class="fl">0.66</span>, <span class="fl">0.68</span>),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="fl">0.66</span>, <span class="fl">1.00</span>, <span class="fl">0.60</span>),</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="fl">0.68</span>, <span class="fl">0.60</span>, <span class="fl">1.00</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 逆行列を求める</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(mat_c, vec_r) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>vec_r <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.78</span>, <span class="fl">0.53</span>, <span class="fl">0.50</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>mat_c <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="fu">c</span>(<span class="fl">1.00</span>, <span class="fl">0.66</span>, <span class="fl">0.68</span>),</span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="fu">c</span>(<span class="fl">0.66</span>, <span class="fl">1.00</span>, <span class="fl">0.60</span>),</span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="fu">c</span>(<span class="fl">0.68</span>, <span class="fl">0.60</span>, <span class="fl">1.00</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># 逆行列を求める</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">solve</span>(mat_c, vec_r) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  0.80  0.05 -0.07</code></pre>
 </div>
@@ -336,16 +346,31 @@ a^2 + b^2 + c^2 + 2(adb) + 2(aec) + 2(bfc) + g
 &amp;2(0.80\cdot 0.66\cdot 0.05) + 2\cdot (0.80\cdot 0.68 \cdot (-0.07)) + \\
 &amp;2\cdot (0.05 \cdot 0.60 \cdot (-0.07)) + g
 \end{align*}\]</span> が得られ，ここから <span class="math display">\[\begin{align*}
-1.00=0.62+g
+1.00=0.62+g\\
 g=0.38
 \end{align*}\]</span> と求めることができます。標準化された状況での（予測）誤差の分散ですから，逆に従属変数 <span class="math inline">\(y\)</span> の分散説明率，すなわち決定係数 <span class="math inline">\(R^2\)</span> は <span class="math display">\[
 R^2=0.62
 \]</span> であることがわかります。</p>
 </section>
-<section id="r-による分析" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="r-による分析"><span class="header-section-number">2.7</span> <em>R</em> による分析</h2>
+<section id="間接効果" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="間接効果"><span class="header-section-number">2.7</span> 間接効果</h2>
+<p>重回帰モデルしか分析手法がない場合とくらべて， パスモデルでは，例えば３つの変数の関係を以下のように表すことができます。</p>
+<p><img src="./images/ch05_path_seq.png" class="img-fluid" style="width:75.0%"></p>
+<p><img src="./images/ch05_path_two.png" class="img-fluid" style="width:75.0%"></p>
+<p><img src="./images/ch05_path_indirect.png" class="img-fluid" style="width:75.0%"></p>
+<p>このように柔軟にモデル構成ができると，重回帰モデルにはなかったタイプの変数の影響を考えることができます。<strong>間接効果</strong> （indirect effect）と呼ばれる波及効果です。 間接効果は，ひとつの影響が，他の変数を経由して複合的に及びます。 例えば，一番上の図の <span class="math inline">\((a \times b)\)</span> や一番下の <span class="math inline">\((a \times b)\)</span> が間接効果にあたります。</p>
+</section>
+<section id="r-による分析" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="r-による分析"><span class="header-section-number">2.8</span> <strong>R</strong> による分析</h2>
+<section id="相関係数行列の入力" class="level3" data-number="2.8.1">
+<h3 data-number="2.8.1" class="anchored" data-anchor-id="相関係数行列の入力"><span class="header-section-number">2.8.1</span> 相関係数行列の入力</h3>
+<p>パスモデル（SEM）の枠組みでの分析には，<strong>R</strong>のパッケージ<em>lavaan</em>（<em>la</em> tent <em>va</em> riable <em>an</em> lysis）を使用します。</p>
+<p>まず，相関係数行列を読み込みます。<em>lavaan</em>の関数<code>lav_matrix_lower2full()</code>を利用すれば， 下三角行列の状態で入力しても問題ありません。 データフレームでなくても，行名と列名を付すことで分析データとして使用できます。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(lavaan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">require</span>(lavaan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: lavaan</code></pre>
 </div>
@@ -353,15 +378,18 @@ R^2=0.62
 <pre><code>This is lavaan 0.6-19
 lavaan is FREE software! Please report any bugs.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mat_cor <span class="ot">&lt;-</span> <span class="fu">lav_matrix_lower2full</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">1.00</span>,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.66</span>, <span class="fl">1.00</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.68</span>, <span class="fl">0.60</span>, <span class="fl">1.00</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.78</span>, <span class="fl">0.53</span>, <span class="fl">0.50</span>, <span class="fl">1.00</span>))</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>vec_vnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x1"</span>, <span class="st">"x2"</span>, <span class="st">"x3"</span>, <span class="st">"y"</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mat_cor) <span class="ot">&lt;-</span> vec_vnames</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mat_cor) <span class="ot">&lt;-</span> vec_vnames</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat_cor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>mat_cor <span class="ot">&lt;-</span> <span class="fu">lav_matrix_lower2full</span>(</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">c</span>(<span class="fl">1.00</span>,</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="fl">0.66</span>, <span class="fl">1.00</span>,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="fl">0.68</span>, <span class="fl">0.60</span>, <span class="fl">1.00</span>,</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="fl">0.78</span>, <span class="fl">0.53</span>, <span class="fl">0.50</span>, <span class="fl">1.00</span>))</span>
+<span id="cb6-6"><a href="#cb6-6"></a>vec_vnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x1"</span>, <span class="st">"x2"</span>, <span class="st">"x3"</span>, <span class="st">"y"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="fu">rownames</span>(mat_cor) <span class="ot">&lt;-</span> vec_vnames</span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="fu">colnames</span>(mat_cor) <span class="ot">&lt;-</span> vec_vnames</span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="fu">print</span>(mat_cor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     x1   x2   x3    y
 x1 1.00 0.66 0.68 0.78
@@ -370,22 +398,46 @@ x3 0.68 0.60 1.00 0.50
 y  0.78 0.53 0.50 1.00</code></pre>
 </div>
 </div>
-<p>モデルを記述します。</p>
+<p>上のように，分析対象の相関係数行列を用意できました。</p>
+</section>
+<section id="モデル式" class="level3" data-number="2.8.2">
+<h3 data-number="2.8.2" class="anchored" data-anchor-id="モデル式"><span class="header-section-number">2.8.2</span> モデル式</h3>
+<p>続いてモデル式を記述します。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mdl_path_multireg <span class="ot">&lt;-</span> <span class="st">'</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="st">  y ~ a*x1 + b*x2 + c*x3</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">  # optional</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">  y ~~ g*y</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="st">  x1 ~~ d*x2</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="st">  x1 ~~ e*x3</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">  x2 ~~ f*x3</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>mdl_path_multireg <span class="ot">&lt;-</span> <span class="st">'</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  y ~ a*x1 + b*x2 + c*x3 # 重回帰モデル</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="st">  # 以下4行は記述しなくても本来は支障なし</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="st">  # 誤差分散と独立変数間の共分散にラベル付け</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="st">  # いずれもlavaanは自動的に設定するため</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="st">  # 分析者が明示的に記述する必要はない</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="st">  y ~~ g*y</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="st">  x1 ~~ d*x2</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="st">  x1 ~~ e*x3</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="st">  x2 ~~ f*x3</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="st">'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<p>関数を使って推定。</p>
+<p>1行目がモデル式のオブジェクト名で，代入の<code>&lt;-</code>の後に引用符<code>’ ’</code>が続いています。 つまり，文字列としてモデルを記述しているということです。 二重引用符<code>” “</code>でも同じです。</p>
+<p>切片を含む重回帰モデルの式 <span class="math display">\[y = i + ax_1+bx_2+cx_3+誤差\]</span> に対して，<strong>R</strong>での変数名がそれぞれ<code>y, x1, x2, x3</code>に対応しているとき，式は<code>y ~ 1 + x1 + x2 + x3</code>と表します。関数<code>lm()</code>の表記と共通していますが，<span class="math inline">\(x\)</span> <strong>によって</strong> <span class="math inline">\(y\)</span> が予測，説明されるとき，<code>y ~ x</code>のように記述します。</p>
+<p>係数 <span class="math inline">\(a\)</span>，<span class="math inline">\(b\)</span>，<span class="math inline">\(c\)</span> を書く必要はありません。また，誤差項の記述も不要です。</p>
+<p><code> ~ 1</code>は定数，平均，切片を表す記法です。ただし，ここでは標準化したデータを考え，切片項の <span class="math inline">\(i\)</span> は扱わない <span class="math inline">\(y = ax_1+bx_2+cx_3+誤差\)</span> を考えているので，上記2行目に<code> ~ 1</code>の記述はありません。</p>
+<p>コメントでも示しましたが，記号<code>*</code>はパラメータにラベルを付けるための印です。まず，誤差分散は （<em>lavaan</em>が自動的に設定してくれますが）<code>y~~y</code>と表します。 <code> ~~ </code>が分散・共分散の表記です。変数 <span class="math inline">\(y\)</span> と <span class="math inline">\(y\)</span>，つまり自分自身との共分散なので分散，しかもここでは誤差変数の分散を表すことになります。</p>
+<p>その上で，<code>g*</code>を間に挟み，この誤差分散に<code>g</code>というラベルを付けています。以下，<code>x1~~d*x2</code>なども同様です。パス図で示したアルファベットと対応するようにラベルを付しています。</p>
+<p><code>lavaan()</code>では，モデルで直接推定される係数以外に，モデル内のパラメータを使って新しいパラメータを定義することができます。このモデルにはありませんが，間接効果を定義可能です。記号は <code>:=</code> を使います。例えば，親の収入 <span class="math inline">\(x_1\)</span> の多寡が学業上の向上心 <span class="math inline">\(x_2\)</span> を変化させ，その影響が達成度 <span class="math inline">\(y\)</span> に及ぶ，というモデルの場合，各々のパス係数が <span class="math inline">\(a\)</span> と <span class="math inline">\(b\)</span> であった場合，<code>y ~ a*x1 + b*x2</code> のように，パス係数にラベルをつけた上で， <code>ind_eff := a * c</code>のように記述します。<code>ind_eff</code>は私がつけたラベルで，他でももちろんかまいません。また，<code>a * c</code>の<code>*</code>はラベル付けではなく，係数を掛け合わせて間接効果を表しています。</p>
+<p>まとめると，以下の通りです。 <img src="./images/ch05_tab_syntax.png" class="img-fluid" style="width:90.0%"></p>
+</section>
+<section id="分析の実行" class="level3" data-number="2.8.3">
+<h3 data-number="2.8.3" class="anchored" data-anchor-id="分析の実行"><span class="header-section-number">2.8.3</span> 分析の実行</h3>
+<p>パッケージ<em>lavaan</em>には，その名と同じ，SEMの分析に汎用的に使える関数<code>lavaan()</code>がありますが，ここでは以下のように関数<code>sem()</code>を使って推定を行います。<code>sem()</code>は<code>lavaan()</code>のラッパー関数です。いくつかの引数が，ここでの分析に適切な形であらかじめ設定されています。詳しくは<code>?sem()</code>で確認しましょう。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fit_path_multireg <span class="ot">&lt;-</span> <span class="fu">sem</span>(mdl_path_multireg,</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample.cov =</span> mat_cor, <span class="at">sample.nobs =</span> <span class="dv">100</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_path_multireg, <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>fit_path_multireg <span class="ot">&lt;-</span> <span class="fu">sem</span>(mdl_path_multireg,</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="at">sample.cov =</span> mat_cor, <span class="at">sample.nobs =</span> <span class="dv">100</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="fu">summary</span>(fit_path_multireg, <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>lavaan 0.6-19 ended normally after 18 iterations
 
@@ -433,8 +485,34 @@ R-Square:
     y                 0.611</code></pre>
 </div>
 </div>
+<p><code>sem()</code>（<code>lavaan()</code>）は，共分散行列（およびサンプルサイズ指定）か，またはデータフレームを分析対象として受け付けます。今回は引数<code>sample.cov</code>と<code>sample.nobs</code>にそれぞれ4変数の相関係数行列と人数を指定しています。データフレームの場合は，引数<code>data</code>に与えます。</p>
+<p>分析結果のオブジェクトを関数<code>summary()</code>に渡すと，何も指定しなければ主に以下が出力されます。</p>
+<ol type="1">
+<li>推定が収束したか（最適計算が無事に終了したか）</li>
+<li>推定法</li>
+<li>サンプルサイズ</li>
+<li>適合度指標（<span class="math inline">\(\chi^2\)</span>統計量とその自由度および<span class="math inline">\(p\)</span>値）</li>
+<li>非標準化解</li>
+<li>標準誤差</li>
+<li>推定値と標準誤差の比（Wald統計量）と<span class="math inline">\(p\)</span>値</li>
+</ol>
+<p><code>lavaan()</code>の推定結果用の<code>summary()</code>の重要な引数は，</p>
+<ul>
+<li><code>standardized</code></li>
+<li><code>fit.measures</code></li>
+<li><code>rsquare</code></li>
+<li><code>modindices</code></li>
+</ul>
+<p>です。ここでは<code>rsquare=TRUE</code>とし，従属変数の決定係数（のみ）を確認しましたが，基本的には上記4つすべて<code>TRUE</code>にしておきましょう。</p>
+</section>
+<section id="実習" class="level3" data-number="2.8.4">
+<h3 data-number="2.8.4" class="anchored" data-anchor-id="実習"><span class="header-section-number">2.8.4</span> 実習</h3>
+<ol type="1">
+<li>4変数の相関行列を使って以下のパス図の分析をしなさい。 <img src="./images/ch05_path_achieve.png" class="img-fluid" style="width:85.0%"></li>
+</ol>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
