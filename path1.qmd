@@ -258,5 +258,5 @@ summary(fit_path_multireg, rsquare = TRUE)
 
 ### 実習
 
-1. 4変数の相関行列を使って以下のパス図の分析をしなさい。
+1. 4変数の相関行列を使って以下のパス図の分析をしなさい。間接効果も定義し，検討すること。
 ![](/images/ch05_path_achieve.png){width=85%}

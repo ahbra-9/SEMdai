@@ -10,6 +10,7 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
+    - R_basics1.qmd
     - path1.qmd
     - summary.qmd
     - references.qmd
@@ -26,6 +27,7 @@ format:
     code-line-numbers: true
     code-copy: hover
     code-fold: show
+
   pdf:
     documentclass: scrreprt
 

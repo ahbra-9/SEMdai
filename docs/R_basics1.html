@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; Rの基礎 – 教育測定学研究演習II</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./path1.html" rel="next">
+<link href="./intro.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ffffa96520c6cf7ec6bfd4297e4347f0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2bcba6c496c817d1f95d9bfa6227460e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./R_basics1.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>R</strong>の基礎</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">教育測定学研究演習II</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">はじめに</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">オリエンテーション</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R_basics1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>R</strong>の基礎</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./path1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">パスモデル</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#共通語としてのr" id="toc-共通語としてのr" class="nav-link active" data-scroll-target="#共通語としてのr"><span class="header-section-number">2.1</span> 共通語としての<strong>R</strong></a></li>
+  <li><a href="#rとは何か" id="toc-rとは何か" class="nav-link" data-scroll-target="#rとは何か"><span class="header-section-number">2.2</span> <strong>R</strong>とは何か</a>
+  <ul class="collapse">
+  <li><a href="#言語であり環境" id="toc-言語であり環境" class="nav-link" data-scroll-target="#言語であり環境"><span class="header-section-number">2.2.1</span> 言語であり環境</a></li>
+  <li><a href="#rの導入" id="toc-rの導入" class="nav-link" data-scroll-target="#rの導入"><span class="header-section-number">2.2.2</span> <strong>R</strong>の導入</a></li>
+  <li><a href="#関数" id="toc-関数" class="nav-link" data-scroll-target="#関数"><span class="header-section-number">2.2.3</span> 関数</a></li>
+  <li><a href="#オブジェクト" id="toc-オブジェクト" class="nav-link" data-scroll-target="#オブジェクト"><span class="header-section-number">2.2.4</span> オブジェクト</a></li>
+  <li><a href="#環境" id="toc-環境" class="nav-link" data-scroll-target="#環境"><span class="header-section-number">2.2.5</span> 環境</a></li>
+  </ul></li>
+  <li><a href="#enjoy" id="toc-enjoy" class="nav-link" data-scroll-target="#enjoy"><span class="header-section-number">2.3</span> Enjoy!</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>R</strong>の基礎</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="共通語としてのr" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="共通語としてのr"><span class="header-section-number">2.1</span> 共通語としての<strong>R</strong></h2>
+<blockquote class="blockquote">
+<p>いざ我等降り，彼処にて彼等の言葉を乱し，互いに言葉を通ずることを得ざらしめん。</p>
+</blockquote>
+<p>押井守監督による1989年のアニメーション『機動警察パトレイバー 劇場版』では，旧約聖書創世記11章から上記の語句が引用されます。 もうずいぶん前になりますが，院生だった頃の私が（映画館ではなく）テレビで観た『パトレイバー』の「バベルの塔」に関する上述のシーンは， 最新の基本ソフトウェアを導入した産業用ロボットが暴走する事件を描くこの映画の中でも，特に強く印象に残りました。</p>
+<p>というのも，その当時，統計解析用のソフトウェアやプログラミング言語としてSASやSPSS，MATLAB，MATHEMATICAなどに囲まれ， 講義によってはC言語などを使い，特定の統計モデルに関しては専用のソフトウェアの使用法をそれぞれ学ぶ必要がある中で， 先行研究の手法がSという言語で実装されていたため，さらに新しい言語を学ぶ必要に迫られていたからです。</p>
+<p>教科書の分析例や，統計のそれぞれの手法をバラバラの統計ソフト，言語で理解するのは困難が伴いました。 また，効率も悪く，拙い自分の乱れた言葉では分析が停止したり， ひどい時にはプログラムが暴走したりしてしまうことも少なくありませんでした。</p>
+<p>現在でも，社会科学の分野ではSPSSが広く普及しています（最近では清水先生のHADやJASPなども人気？）。 企業などではExcelが活用され，データを処理するソフトというとExcelを連想するのが一般的かもしれません。</p>
+<p>ところが一方で，20年以上前から計量的な研究の領域やデータ解析の場面で， ひとつのアルファベットの文字が，特に強い関心を惹きつけてきました。 その文字とは，<strong>R</strong>，統計解析環境<strong>R</strong>言語です。 <strong>R</strong>は現在，<em>lingua franca</em>（共通語）という表現が用いられるほど普及し， 分析に活用され，さらに発展を続けています。</p>
+<p>みなさんも，“… using R” や “… with R” といったタイトルや， 「<strong>R</strong>による〇〇」「<strong>R</strong>で理解する□□」のような書名を見かけることが多いのではないでしょうか。 統計数理研究所の公開講座では<strong>R</strong>を実習に活用する講義がほとんどですし， <strong>R</strong>とは別のソフトウェアの使用を前提にしていた統計学の教科書が，<strong>R</strong>版に書き換えられる，といった変化も多く起こりました。 改訂版の序文では，その理由として，多くの大学で<strong>R</strong>の採用が進んでいること， <strong>R</strong>は統計的手法を包括的に扱えることなどが挙げられています。</p>
+<p><em>New York Times</em>では，2009年の時点でGoogleや製薬会社のPfizer，Bank of Americaといった金融，Shellのようなエネルギー産業まで幅広い業種で<strong>R</strong> の利用が広がっている実態が取り上げられています。また，大学での<strong>R</strong>の採用の拡大， 大学院修了生の<strong>R</strong>の習得の実態などが報じられています。 この記事自体に対する反響も大きく，記事発表の2日後には記者がブログで補足を行っており， <strong>R</strong>に向けられた注目の高さを窺い知ることができます。</p>
+<p>機械学習や人工知能研究に強い<em>Python</em>を好む人も多いとは思いますが， これまでの動向を考えると，<strong>R</strong>を知ることは手法の学習や研究，実用など様々な場面で効率性， 生産性を向上させ，非常に有効であると考えられます。</p>
+<p><img src="./images/ch01_2R.png" class="img-fluid" style="width:95.0%"></p>
+</section>
+<section id="rとは何か" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="rとは何か"><span class="header-section-number">2.2</span> <strong>R</strong>とは何か</h2>
+<section id="言語であり環境" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="言語であり環境"><span class="header-section-number">2.2.1</span> 言語であり環境</h3>
+<p><strong>R</strong>では，想像し得るあらゆることを実現可能である，と述べる人もいます。<strong>R</strong>は効率的なデータ操作，行列の形式にも強い計算機能，統合的かつ豊富なデータ解析手法，さらに，データの分析や表示のためのグラフィクスやプログラミング言語としての機能を備えた汎用的で統合的なアプリケーションソフトウェアです。UNIXやmacOS，Windowsなど多様なオペレーティングシステム上で使用することができます。</p>
+<p>高機能な<strong>R</strong>は，その一方で，ソースコードを全面的に公開し，自由に複製，配布，改変が可能であるという特徴を持っています。つまり，どのような仕組みで動いているのかを完全に把握できる<strong>R</strong>を無料で入手し，利用できるということです。このオープンソースとしての<strong>R</strong>の特徴は，自発的で，分散的かつ協働的な開発を促し，世界中の人々が<strong>R</strong>の発展に寄与する状況を生み，現在も改良が続けられています。</p>
+<p><strong>R</strong>は更新の頻度が高く，年に2回，4月と10月に細かい機能を追加するなどのマイナーな更新が行われます。それ以外でも，主に小さな不具合の修正であるパッチでの更新が随時行われています。 また，<strong>R</strong>本体だけでなく，分析手法や他のソフトウェアとの連携など様々な<strong>R</strong>の拡張機能が多くの研究者などによって開発され，<strong>パッケージ</strong>（package）という形で入手可能となっています。このパッケージの充実ぶりを考えると，<strong>R</strong>ではあらゆることが可能であるという上述の意見も，あながち大げさとは言えない印象を受けます。</p>
+<p><strong>R</strong>は，統計解析やグラフィクスのための<strong>言語</strong>であり<strong>環境</strong>であると表現されます。ここで環境（environment）という言葉は，<strong>R</strong>が十分に計画された一貫した設計思想のシステムであることを示しています。</p>
+</section>
+<section id="rの導入" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="rの導入"><span class="header-section-number">2.2.2</span> <strong>R</strong>の導入</h3>
+<p><strong>R</strong>は<a href="http://www.r-project.org/" class="uri">http://www.r-project.org/</a>からダウンロードすることで入手可能です。実際のダウンロードの際には，CRAN（Comprehensive R Archive Network）と呼ばれるサイトから最寄りのミラーサイト（<a href="https://ftp.yz.yamagata-u.ac.jp/pub/cran/" class="uri">https://ftp.yz.yamagata-u.ac.jp/pub/cran/</a>）を選択してダウンロードすることとなります。</p>
+<p><strong>R</strong>は，オンライン上のマニュアルが充実しているだけでなく，ヘルプも役に立ちます（<strong>R</strong>に限らないかも知れませんが）。 使い始めの最初のうち，<strong>R</strong>の関数を使って処理を実行していく際に，何かわからないことや困ったことがあったら，ヘルプを参照するだけで解決されることが多々あります。 <strong>R</strong>を使い慣れているつもりでも，ヘルプの関数の説明に新たな発見があることも珍しくありません。</p>
+<p>ある関数の詳細を調べるだけでなく，目的の処理に対応する関数を見つける検索のための関数も存在します。指定した語句の全部，または一部を含む関数を探したり，曖昧なマッチングで検索したりすることが可能です。</p>
+<p>ある関数が，実際どのように使用できるかのデモンストレーションを実行させたり，具体的な使用例を表示させる関数は，<strong>R</strong>を実際的に理解するのに大変便利です。自分自身で入力し，結果を確認する作業の他に，これらの関数やヘルプを積極的に活用すると，<strong>R</strong>で実際に何が可能なのかが，その実現方法とともに一目瞭然となり，理解が早く深まることが期待できます。</p>
+</section>
+<section id="関数" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="関数"><span class="header-section-number">2.2.3</span> 関数</h3>
+<p><strong>R</strong>における<strong>関数</strong>（function）は，原則，<strong>引数</strong>（argument）を受け取り， 処理し，<strong>戻り値</strong>（return value）を返します。</p>
+<p><strong>R</strong>では，<code>関数名(引数名=値)</code>という形で様々な関数を用い， あるいはそれらを組み合わせ，時には自分で関数を作成して目的の処理を行っていきます。 関数の処理に具体的な内容を与えるのが引数です。 引数が複数の場合はカンマ（ <code>,</code>）で区切ります。 なお，引数名を省略し，その値のみを記述する場合もあります。 また，特別な場合を除いて明示的に指定する必要のない引数や，そもそも引数を必要としない関数もあります。</p>
+<p>戻り値は原則ひとつですが，複数の結果を返したり，明示的な戻り値がない関数もあります。</p>
+<p>電子レンジに食品を温める<strong>機能</strong>（function）があるように， 関数は何らかの処理を機能として提供します。 例えば，関数（機能）<code>電子レンジ</code>に 冷やご飯と温め時間を引数として渡すと， <code>電子レンジ(食材=冷たいごはん, 温め時間=2分)</code> のように実行され，温められたごはんが手に入ります。</p>
+<p>同様に，以下のように正の平方根（<em>sq</em> uare <em>r</em> oo<em>t</em>）を計算する 関数<code>sqrt()</code>の引数<code>x</code>に<span class="math inline">\(9\)</span>を指定すると， <code>3</code>という戻り値が得られます。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">sqrt</span>(<span class="at">x =</span> <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+</section>
+<section id="オブジェクト" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="オブジェクト"><span class="header-section-number">2.2.4</span> オブジェクト</h3>
+<section id="ラベルの付いた容器" class="level4" data-number="2.2.4.1">
+<h4 data-number="2.2.4.1" class="anchored" data-anchor-id="ラベルの付いた容器"><span class="header-section-number">2.2.4.1</span> ラベルの付いた容器</h4>
+<p>少し（退屈な）遠回りになりますが，<strong>R</strong>における<strong>オブジェクト</strong>（object）の考え方を紹介します。</p>
+<p><strong>R</strong>で扱う「対象」は全て一括りにオブジェクトと呼ばれます。 <strong>R</strong>では，数値に限らず文字列や関数，詳細な統計解析結果などを，<strong>作業スペース</strong>（working space）と呼ばれる<strong>R</strong>の環境にオブジェクトとして格納できます。 作業スペースとは，その名の通り<strong>R</strong>の作業台です。 皆さんが勉強するときの「机の上」に例えることができます。 机の上の教科書やノート，参考書などがオブジェクトで，全体として「勉強環境」が構成されていると考えてください。</p>
+<p><strong>R</strong>では，名前が付いたオブジェクトの集合体である<strong>フレーム</strong>（frame）によって環境が構成されます。環境という概念の導入によって，大量のオブジェクトを扱う巨大で複雑なプロジェクトも，混乱なく効率的に扱うことが可能になります。</p>
+<p>オブジェクトはよく「ラベルがついた箱」に例えられます。 何でもいれられる箱，容器のようなイメージです。　</p>
+<p>以下のように，ラベルを付けて<strong>R</strong>にオブジェクトを作りましょう。オブジェクトへの値の代入，あるいは付値（assignment）と呼ばれる作業です。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># ← このシャープ記号はコメント開始の合図</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># この記号以降は改行までRには一切無視される</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># 以下のpiに3を代入するのは説明のためのダメな例です</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>pi <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># !!! piはRにもともと組み込まれている定数のラベル</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># piというラベルのオブジェクトの内容を確認 print する </span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">print</span>(pi) <span class="co"># pi とだけ入力してもprint(pi)と同じ</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>オブジェクトへの付値は，<code>&lt;-</code>を用いて行います。不等号記号とマイナス記号との間にスペースを入れないよう注意しましょう。5行目のように，関数<code>print()</code>で <code>( )</code>内に指定したオブジェクトの中身，内容を表示させることができます。なお，オブジェクト名だけを入力しても同じです。ここでは，3が代入されていることが確認できます。</p>
+<p>また，記号<code>#</code>はコメントの開始を表し，以降改行まで無視されます。</p>
+<p>オブジェクト名には大文字または小文字のアルファベット，数字，ピリオド（<code>.</code>），アンダースコア（<code>_</code>）が使われます（日本語も使用可能ですが，オブジェクト名としてはオススメしません）。自分で付値するオブジェクト名の先頭はアルファベットとします。ピリオドやアンダースコアはオブジェクト名の分かりやすさを高めるために使用されます。 <strong>R</strong>は大文字と小文字を区別するので注意しましょう。 なお， <code>break</code>， <code>else</code>， <code>for</code>， <code>function</code>， <code>if</code>， <code>in</code>， <code>next</code>， <code>repeat</code>， <code>return</code>， <code>file</code>， <code>TRUE</code>， <code>FALSE</code>は， <strong>R</strong> において特別な機能を付された予約語であり，オブジェクト名には使用できません。</p>
+</section>
+<section id="オブジェクトの属性" class="level4" data-number="2.2.4.2">
+<h4 data-number="2.2.4.2" class="anchored" data-anchor-id="オブジェクトの属性"><span class="header-section-number">2.2.4.2</span> オブジェクトの属性</h4>
+<p>オブジェクトは容器のようであるとお伝えしましたが， 中に何が入っているか，いわばタグ付けされていて 非常にわかりやすいというのが便利なところです。</p>
+<p>オブジェクトには，<strong>属性</strong>（attribute）があります。 属性によってそのオブジェクトの特徴，性質を表し，適切な処理が行われます。 例えば，以下の計算がそれを端的に示しています。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>one <span class="ot">&lt;-</span> <span class="dv">1</span>; two <span class="ot">&lt;-</span> <span class="dv">2</span>; three <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># ;で区切ると1行に複数の命令を記述できる</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>one <span class="sc">+</span> two <span class="sc">+</span> three</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># 引用符 ' ' または " " は文字列を表す</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>un <span class="ot">&lt;-</span> <span class="dv">1</span>; doux <span class="ot">&lt;-</span> <span class="dv">2</span>; trois <span class="ot">&lt;-</span> <span class="st">"3"</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>un <span class="sc">+</span> deux <span class="sc">+</span> trois</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error: object 'deux' not found</code></pre>
+</div>
+</div>
+<p>オブジェクト<code>trois</code>は文字列として<code>“3”</code>が格納されているので， これを1や2が入ったオブジェクト<code>un</code>，<code>deux</code>と足すという演算は意味を成しません。 それがエラーに示されています。 これは，オブジェクトの「タグ付け」のうち，<strong>モード</strong>（mode）と呼ばれる属性に関わる問題です。</p>
+</section>
+<section id="モード" class="level4" data-number="2.2.4.3">
+<h4 data-number="2.2.4.3" class="anchored" data-anchor-id="モード"><span class="header-section-number">2.2.4.3</span> モード</h4>
+<p>モードは，オブジェクトの属性の中でも，長さ（length）とともに本来的なものとされます。 データ分析で重要になるモードの種類は，以下の3つです。</p>
+<ol type="1">
+<li><code>numeric</code> ：数値型（整数 integer と倍精度 double の両方を含む）</li>
+<li><code>charachter</code> ：文字列型</li>
+<li><code>logical</code> ：論理型</li>
+</ol>
+<p>オブジェクトのモードが何であるかは，関数<code>mode()</code>で確認することができます。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">mode</span>(one)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">mode</span>(trois)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">mode</span>(<span class="cn">TRUE</span>)  <span class="co"># Rにおける「真」「偽」はそれぞれ大文字TRUEとFALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># 関数c() はcombine, concatenateのc</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co"># 要素を並べてベクトルにする</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>vec_num_logi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb15-4"><a href="#cb15-4"></a>vec_num_logi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 1 0</code></pre>
+</div>
+</div>
+<p>6行目の中身を<strong>R</strong>に出力すると，論理型である<code>TRUE</code>と<code>FALSE</code>が， それぞれ<span class="math inline">\(1\)</span>と<span class="math inline">\(0\)</span>に変換されていることに注意しましょう。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">mode</span>(vec_num_logi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+</div>
+<p>このベクトルのモードは数値型です。つまり，ベクトルは単一種類のモードしかとり得ず， 異なるモードの要素が含まれる場合，強制変換されます。 例えば，文字列と数値をベクトルとして並べれば，数値は文字列に変換されます。</p>
+<p>オブジェクトが，ある特定のモードであるかどうかを判定するには， <code>abc</code>をそのモード名として，関数<code>is.abc</code>を用います。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">is.logical</span>(one)     <span class="co"># --- オブジェクト one は論理型ですか？</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">is.character</span>(one)   <span class="co"># --- 文字型ですか？</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">is.numeric</span>(one)   <span class="co"># --- 数値型ですか？</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>なお，中身が空の，つまり長さ0のベクトルを作成することも可能であり，そのオブジェクトにもモードが付与されます。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>vec_empty <span class="ot">&lt;-</span> <span class="fu">c</span>()  <span class="co"># --- 関数c()の中身が何も無く，空っぽ</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>vec_empty         <span class="co"># --- オブジェクト内容の表示</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">length</span>(vec_empty) <span class="co"># --- オブジェクトの「長さ」を表示</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">mode</span>(vec_empty)   <span class="co"># --- 空（から）のオブジェクトのモード</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "NULL"</code></pre>
+</div>
+</div>
+<p><code>NULL</code>は空値，ヌル値と呼ばれ， オブジェクト<code>vec_empy</code>の中身が空っぽであることを表します。 <code>length()</code>という関数は，オブジェクトの「長さ」を返します。 オブジェクトによって，長さという表現が必ずしも最適ではないので，ここでは「長さ」と表記しています。 ベクトルの場合，<code>length()</code>が返すのは要素の数です。 要素はありませんので，<code>0</code>と表示されています。 ここではモードも<code>“NULL”</code>です。</p>
+</section>
+<section id="クラス" class="level4" data-number="2.2.4.4">
+<h4 data-number="2.2.4.4" class="anchored" data-anchor-id="クラス"><span class="header-section-number">2.2.4.4</span> クラス</h4>
+<p>モードというオブジェクトの属性は，数値か文字かといった基礎的な特徴を表していました。 基礎的であるだけに重要な区別ですが，より進んだ分析においては汎用性，抽象性が高過ぎることも否めません。 これに対して，オブジェクトには<strong>クラス</strong>（class）という属性も存在します。</p>
+<p>モードが，例えば「本」という抽象化の水準とするならば， クラスは「教科書」，「参考書」，「マンガ」程度の抽象化と考えることができます。 以下の具体例で，クラスという概念を導入する利点を確認してみましょう。</p>
+<p>8月25日の金曜日から，9週分の金曜日の日付を表示します。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">weekdays</span>(<span class="st">"2025-8-25"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in UseMethod("weekdays"): no applicable method for 'weekdays' applied to an object of class "character"</code></pre>
+</div>
+</div>
+<p>関数<code>weekdays()</code>は曜日を返す関数です。 モードが文字列（ここでは<code>character</code>というクラスでもある）である<code>“2025-08-25”</code>には 曜日も何もありませんから，当然エラーが返されます。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>day1 <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2025-8-25"</span>) <span class="co"># --- 文字列"2025-8-25"を日付として変換</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="fu">weekdays</span>(day1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Monday"</code></pre>
+</div>
+</div>
+<p>関数<code>as.Date()</code>は，単なる文字列である<code>“2025-08-25”</code> を， <code>Date</code>という日付クラスに変換します。 ある特定のモード<code>abc</code>の判定に <code>is.abc()</code> という関数があったように，特定のモード，あるいはクラスに変換する <code>as.abc()</code>という関数が用意されています。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>( vec_9weeks <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from=</span>day1, <span class="at">length.out=</span><span class="dv">9</span>, <span class="at">by=</span><span class="st">"1 week"</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2025-08-25" "2025-09-01" "2025-09-08" "2025-09-15" "2025-09-22"
+[6] "2025-09-29" "2025-10-06" "2025-10-13" "2025-10-20"</code></pre>
+</div>
+</div>
+<p><code>seq()</code>という関数は，規則的な（sequentialな）要素のベクトルを生成します。 8月25日（引数<code>from</code>で指定）から1週間おき（引数<code>by</code>）に， 9週分（<code>length.out</code>）の日付を生成しています。</p>
+<p>オブジェクト<code>vec_9weeks</code>の特徴を調べてみましょう。 クラスを知るには，関数<code>class()</code>を用います。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">mode</span>(vec_9weeks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">class</span>(vec_9weeks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Date"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">str</span>(vec_9weeks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> Date[1:9], format: "2025-08-25" "2025-09-01" "2025-09-08" "2025-09-15" "2025-09-22" ...</code></pre>
+</div>
+</div>
+<p>モードは<code>numeric</code>，すなわち数値であることが返されています。 しかし，ただの数字ではありません。そのクラスは<code>“Date”</code>です。 5行目の<code>str()</code>は，様々なオブジェクトの構造を知るのに便利な関数です。</p>
+<p>では，ここで<code>vec_9weeks</code>の平均を関数<code>mean()</code>を用いて計算してみましょう。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>( middle_day <span class="ot">&lt;-</span> <span class="fu">mean</span>(vec_9weeks) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2025-09-22"</code></pre>
+</div>
+</div>
+<p>上記のように，2025-09-22が2025-08-25と2025-10-20の平均として計算されます。 このような処理こそ，<strong>R</strong>が統合的な統計解析環境であると言われる所以です。 <code>Date</code>というクラスに属しているオブジェクトに関数<code>mean()</code>が適用されると， このクラスの特徴に応じて，通常の算術平均を求める関数とは異なる<code>mean.Date()</code>という関数が使用されます。 実は<code>seq()</code>を日付に適用したときにも，同様のことが起こっていました。</p>
+<p>分析者は，数値の平均にはこの関数，日付の平均にはあの関数というようなことを意識する必要はありません。 適切にオブジェクトを扱っていれば，適切な方法が選択されるように<strong>R</strong>は設計されています。</p>
+<p>なお，モードやクラスを判定する関数<code>is.abc()</code>や， あるモードやクラスに変換する<code>as.abc()</code>には， 以下のコードで出力されるように様々なものがあります。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">apropos</span>(<span class="st">"^is</span><span class="sc">\\</span><span class="st">."</span>) <span class="co"># 出力は省略</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="fu">apropos</span>(<span class="st">"^as</span><span class="sc">\\</span><span class="st">."</span>) <span class="co"># 出力は省略</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="環境" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="環境"><span class="header-section-number">2.2.5</span> 環境</h3>
+<p><code>pi &lt;- 3</code>とした付値において ダメな例であるとコメントを付したのは， <code>pi</code>は<strong>R</strong>がすでに使用しているオブジェクト名だからです。この代入の後，以下の計算をすると，期待される答え<span class="math inline">\(-1\)</span>が返ってきません。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">cos</span>(pi) <span class="co"># --- pi には3 が格納されている</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.9899925</code></pre>
+</div>
+</div>
+<p>オブジェクトを取り除くには，関数<code>rm()</code> または<code>remove()</code> を使用します。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">rm</span>(pi) <span class="co"># --- remove(pi) としても同じ</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a><span class="fu">ls</span>()   <span class="co"># --- 作業スペース内のオブジェクトの表示 # objects() としても同様</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "day1"         "doux"         "middle_day"   "one"          "three"       
+ [6] "trois"        "two"          "un"           "vec_9weeks"   "vec_empty"   
+[11] "vec_num_logi"</code></pre>
+</div>
+</div>
+<p>1行目でオブジェクト<code>pi</code>を削除しています。 2行目の<code>ls()</code>という関数は， 作業スペースに存在するオブジェクト名を返す関数です。 出力の<code>character(0)</code>は，文字列が何も無いことを意味しています。つまり，中身が3である<code>pi</code>というラベルのオブジェクトは消去されたことが確認できました。</p>
+<p>ところが，以下のように<code>pi</code>というラベルの オブジェクトの中身を確認することができ，その値は円周率であることが確認できます。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>pi <span class="co"># --- 削除を確認したはずのpiの表示</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.141593</code></pre>
+</div>
+</div>
+<p><code>rm(pi)</code> という命令は，<strong>R</strong>に元々組み込まれた <code>pi</code> まで削除した訳ではないことがわかります。 これは，<strong>R</strong>の「環境」という考え方を表すものです。</p>
+<p>3を代入した<code>pi</code>は， 作業スペースと呼ばれる環境にありました。 これは，<strong>大域的環境</strong>（global environment）と呼ばれる環境です。 最も上層で優先される場所になっています。 一方，組み込みの<code>pi</code>は， <strong>base</strong>と呼ばれる環境に存在します。 作業スペースにあった<code>pi</code> というオブジェクトが無くなったので， baseの<code>pi</code>の値が表示される結果となりました。 なお，base環境にあるオブジェクトを消去することはできません。</p>
+<p>環境について，次のように確認してみましょう。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="co"># ( )でくくるとオブジェクト生成と同時に内容を表示</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>(pi <span class="ot">&lt;-</span> <span class="dv">3</span>)                                      <span class="co"># --- pi に3 を代入</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="fu">ls.str</span>(<span class="at">envir=</span>.GlobalEnv, <span class="at">pattern=</span><span class="st">"^pi"</span>)        <span class="co"># --- 作業スペースのpi</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>pi :  num 3</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="fu">ls.str</span>(<span class="at">envir=</span>.BaseNamespaceEnv, <span class="at">pattern=</span><span class="st">"^pi"</span>) <span class="co"># --- base のpi</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>pi :  num 3.14
+pipe : function (description, open = "", encoding = getOption("encoding"))  </code></pre>
+</div>
+</div>
+<p>上では関数<code>ls()</code>ではなく<code>ls.str()</code>を使用しています。 これによって，引数<code>envir</code> で指定した環境内にあるオブジェクト名と，その構造（structure）も同時に表示させることができます。 構造とは，オブジェクトの特徴を示したものです。 なお，引数<code>envir</code>に何も指定しなければ，そのデフォルト（既定値）である作業スペースが対象となります。</p>
+<p><code>.GlobalEnv</code>と<code>.BaseNamespaceEnv</code>は，それぞれ大域的環境（作業スペース）とbase環境を表す<strong>R</strong>のオブジェクトです。つまり，環境も<strong>R</strong>の中ではオブジェクトとして扱われます。</p>
+<p>作業スペースにある<code>pi</code>は， 自分で付値した3であることが<code>pi:num 3</code> という表示で示されています。 base環境内では<code>pi:num 3.14</code>であり， それぞれの環境で異なる<code>pi</code> が存在することがわかります。 勉強机と食事用テーブルは，はっきり区別されているわけです。</p>
+</section>
+</section>
+<section id="enjoy" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="enjoy"><span class="header-section-number">2.3</span> Enjoy!</h2>
+<p>先述した<strong>R</strong>のデータ操作や計算，描画などの機能は，有機的に連携させることが可能です。例えば，回帰分析の出力結果を用いて，今度はそれを図示すること，あるいは次の段階の詳細な分析に利用することなども容易です。</p>
+<p>回帰分析の<strong>R</strong>での実行方法は，わずかな変更で一般化線形モデルにも適用できます。また，要約のための関数をひとつ覚えることで，多岐にわたる手法の様々な分析結果も，内部での違いをほとんど意識せずに同様に使用することができます。このことは，データの特徴（より細かくは変数の種類など）に応じた適切な処理，分析手法の選択が行われることを意味します。</p>
+<p>そもそも<strong>R</strong>は，「統合的な考え方に基づき，洗練され，広く認められた揺るぎないソフトウェアシステム」として1998年にThe Association for Computing MachineryのSoftware System Awardを受賞したS言語に基づいています。Sはそれまでのデータの扱い方，分析の仕方，視覚化の方法を決定的に変えたと言われる優れたシステムです。そのようなソフトウェアを設計の根幹に置く<strong>R</strong>によって，統計解析の様々な要素を総合的に扱えることは，データを詳細に分析し，分析した結果を使って次の分析に繋げるといった対話的，逐次的，探索的なデータ解析を可能にします。グラフィクスなども併用しながら，データから広く深く知見を導くことができる統一的な操作環境は，定型的で固定的なソフトウェアの出力に飽き足らない分析者にとって，理想的であると言えるでしょう。</p>
+<p>しかし一方で，<strong>R</strong>の柔軟性は，分析者が何をどうしたいのかという目的を明確にし，何をしているのかという分析の実質を把握する必要性を，より高めることも意味します。基本的には，入力画面に関数と呼ばれる命令を入力することで処理を実行していく<strong>R</strong>では，ある程度のプログラミングの知識，技術が必要となります。視覚的に分かりやすいインターフェイス上で，マウスなどのクリックによって高度な分析も実行可能なソフトウェアに比べると，「学習曲線が急峻である」「敷居が高い」などと言われる所以のひとつです。</p>
+<p>しかし，<strong>R</strong>を使用するために必要な資格（ライセンス）に特別なものはいりません。それは関数<code>license()</code>の実行で表示される言葉に象徴されています。</p>
+<div style="text-align: center;">
+<pre><code>Share and Enjoy.</code></pre>
+</div>
+<p>データ解析を楽しみながら学べる，研究できる，使える環境こそ<strong>R</strong>です。実際に使ってみて，その喜びを共有してください。</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./intro.html" class="pagination-link" aria-label="オリエンテーション">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">オリエンテーション</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./path1.html" class="pagination-link" aria-label="パスモデル">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">パスモデル</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
