@@ -11,6 +11,7 @@ book:
     - index.qmd
     - intro.qmd
     - R_basics1.qmd
+    - R_basics2.qmd
     - path1.qmd
     - summary.qmd
     - references.qmd
