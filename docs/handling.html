@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Rによるデータ分析 – 教育測定学研究演習II</title>
+<title>4&nbsp; データハンドリング – 教育測定学研究演習II</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./handling.html" rel="next">
-<link href="./R_basics1.html" rel="prev">
+<link href="./path1.html" rel="next">
+<link href="./R_basics2.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./R_basics2.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rによるデータ分析</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./handling.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">データハンドリング</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -162,14 +162,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_basics2.html" class="sidebar-item-text sidebar-link active">
+  <a href="./R_basics2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rによるデータ分析</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./handling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">handling.html</span></span></a>
+  <a href="./handling.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">データハンドリング</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -200,10 +200,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#データの読み込み" id="toc-データの読み込み" class="nav-link active" data-scroll-target="#データの読み込み"><span class="header-section-number">3.1</span> データの読み込み</a></li>
-  <li><a href="#作業ディレクトリ" id="toc-作業ディレクトリ" class="nav-link" data-scroll-target="#作業ディレクトリ"><span class="header-section-number">3.2</span> 作業ディレクトリ</a></li>
-  <li><a href="#パッケージの利用" id="toc-パッケージの利用" class="nav-link" data-scroll-target="#パッケージの利用"><span class="header-section-number">3.3</span> パッケージの利用</a></li>
-  <li><a href="#物件探し" id="toc-物件探し" class="nav-link" data-scroll-target="#物件探し"><span class="header-section-number">3.4</span> 物件探し</a></li>
+  <li><a href="#種族値分析編" id="toc-種族値分析編" class="nav-link active" data-scroll-target="#種族値分析編"><span class="header-section-number">4.1</span> 種族値分析編</a>
+  <ul class="collapse">
+  <li><a href="#tidyverseの世界" id="toc-tidyverseの世界" class="nav-link" data-scroll-target="#tidyverseの世界"><span class="header-section-number">4.1.1</span> tidyverseの世界</a></li>
+  <li><a href="#変数の取り出し" id="toc-変数の取り出し" class="nav-link" data-scroll-target="#変数の取り出し"><span class="header-section-number">4.1.2</span> 変数の取り出し</a></li>
+  <li><a href="#効率的な取り出し方法" id="toc-効率的な取り出し方法" class="nav-link" data-scroll-target="#効率的な取り出し方法"><span class="header-section-number">4.1.3</span> 効率的な取り出し方法</a></li>
+  <li><a href="#データの変換" id="toc-データの変換" class="nav-link" data-scroll-target="#データの変換"><span class="header-section-number">4.1.4</span> データの変換</a></li>
+  <li><a href="#偏差値での検討" id="toc-偏差値での検討" class="nav-link" data-scroll-target="#偏差値での検討"><span class="header-section-number">4.1.5</span> 偏差値での検討</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -212,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rによるデータ分析</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">データハンドリング</span></h1>
 </div>
 
 
@@ -229,193 +233,182 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="データの読み込み" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="データの読み込み"><span class="header-section-number">3.1</span> データの読み込み</h2>
-<p>じゃんけんのデータを作成しましょう。 データ<code>SEMdai_Rock.xlsx</code>には， 私が（実際は<strong>R</strong>の関数<code>sample()</code>が）30回のじゃんけんで出した手が入力されています。</p>
-<p>これをダウンロードし，<code>自分</code>と書かれた列に 出した手を入力しましょう。</p>
-<p>入力できたらデータを<strong>R</strong>に読み込みます。 そのために，<strong>作業ディレクトリ</strong>（working directory）と <strong>パッケージ</strong>（package）について紹介します。</p>
+<section id="種族値分析編" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="種族値分析編"><span class="header-section-number">4.1</span> 種族値分析編</h2>
+<section id="tidyverseの世界" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="tidyverseの世界"><span class="header-section-number">4.1.1</span> tidyverseの世界</h3>
+<p>データ分析では，各変数の分布の特徴を捉え， 変数間の関連を検討し，情報を得ようとします。 また，変数の変換や新たな変数の追加などを頻繁に行います。</p>
+<p>ここでは，<code>pokemon.xlsx</code>を分析しながら， パッケージ<code>tidyverse</code>を利用して 効率的に分析を進める方法を確認しましょう。</p>
+<p>基本となる関数は以下の3つです。 1. <code>select()</code>：特定の変数を選択する 1. <code>mutate()</code>：変数を変換したり，新しい変数を追加したりする 1. <code>summarize()</code>：平均や標準偏差など，変数の要約結果を得る</p>
 </section>
-<section id="作業ディレクトリ" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="作業ディレクトリ"><span class="header-section-number">3.2</span> 作業ディレクトリ</h2>
-<p><strong>R</strong>には，<strong>作業スペース</strong>（working space）という考え方がありました。 「環境」とも呼ばれるここにオブジェクトを登録したり，ここから呼び出したりして分析作業を進めていきます。</p>
-<p>同様に，作業ディレクトリ（working directory）では，ファイルにデータを書き込んだり，ファイルから読み込んだりすることができます。ディレクトリはフォルダと同義です。 明示的に指定しなければ，<strong>R</strong>がデータファイルなどを探すのは，この作業ディレクトリです。作業スペースが勉強机だとしたら，作業ディレクトリは「机の引き出し」に例えることができます。隠していたマンガ本を取り出したり，作成したノートをしまったりする場所です。</p>
-<p>作業ディレクトリの場所を確認するには以下のようにします（macOSを想定）。</p>
+<section id="変数の取り出し" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="変数の取り出し"><span class="header-section-number">4.1.2</span> 変数の取り出し</h3>
+<p>tidyなtable状のデータフレームであるtibble形式のデータから変数を取り出すには，関数<code>select()</code>を使います。 抜き出したい変数の名前に引用符<code>” “</code>を付ける必要はありません。 取り出した結果もtibble形式であり， 指定した順に抜き出されるので，変数の並べ替えにも使えます。</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># get working directory</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">getwd</span>()           <span class="co"># --- 現在の作業ディレクトリの確認</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "/Users/inanity/GitVS/SEMdai"</code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># 作業ディレクトリの変更</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">setwd</span>(<span class="st">"~/Downloads"</span>) <span class="co"># ~で表されるホームディレクトリの下のダウンロードフォルダ</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">getwd</span>()           <span class="co"># --- 再確認</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "/Users/inanity/Downloads"</code></pre>
-</div>
-</div>
-<p>作業ディレクトリに読み込みたいデータのファイルがあれば， <code>“SEMdai_Rock.xlsx”</code>のようにファイル名を指定するだけでOKです。 もちろん，コンピュータ内の正確な場所を指定すれば， 作業ディレクトリがどこであっても読み込み可能です。</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>flnm <span class="ot">&lt;-</span> <span class="st">"~/Downloads/SEMdai_Rock.xlsx"</span>  <span class="co"># フルパス</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>tbl_j <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="at">path =</span> flnm) <span class="co"># これはズルで，本当は準備しないとエラーが出る</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
-<section id="パッケージの利用" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="パッケージの利用"><span class="header-section-number">3.3</span> パッケージの利用</h2>
-<p>データはcsv（comma separated values）形式で配布されることが多く， 各値がカンマで区切られただけのcsvファイルの方が，テキストファイルとして メモ帳などでも開けるのでいいのですが，私が文字化けの問題に疲れ果てた感があり， Excelを利用してしまっています。</p>
-<p><strong>R</strong>は，そのままでは拡張子xlsxのExcelファイルを扱えません。 そこで利用するのが<strong>パッケージ</strong>（package）です。 パッケージは，<strong>R</strong>の機能を拡張する関数やデータのまとまりです。 導入するとそれまで不可能，あるいは非常に煩雑であった処理を実行可能になります。 ここでは，Excelファイルを読み込めるようになる<code>readxl</code>を使います。</p>
-<p>パッケージを利用するために必要なことは２つ，<strong>インストール</strong>と「<strong>起動</strong>」です。 パッケージを起動することは，「パッケージを読み込む」「パッケージを呼び出す」など のように言われることもあります。</p>
-<p>工場出荷時の状態のスマートフォンが元の<strong>R</strong>で，SNSツールやゲームなど， インストールするアプリがパッケージであると捉えるとよいでしょう。 スマホアプリ（パッケージ）のインストールは一度行えばOKですが， 利用するには都度，指でタップして起動（パッケージの呼び出し）を する必要があります。</p>
-<p>パッケージは以下のように簡単にインストール可能です。</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># パッケージをダウンロードするリポジトリの指定</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="st">"https://ftp.yz.yamagata-u.ac.jp/"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">update.packages</span>(<span class="at">ask =</span> <span class="cn">FALSE</span>) <span class="co"># インストール済みパッケージのアップデート</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">require</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: unable to access index for repository https://ftp.yz.yamagata-u.ac.jp/src/contrib:
-  cannot open URL 'https://ftp.yz.yamagata-u.ac.jp/src/contrib/PACKAGES'</code></pre>
+<pre><code>Loading required package: tidyverse</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># readxl がインストールされているかどうか確認</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="co"># 未インストールの場合にFALSEになるので，否定(!)してTRUEにし</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co"># if以下が実行されるようにする</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(readxl)){</span>
-<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span>
-<span id="cb8-6"><a href="#cb8-6"></a>  <span class="fu">require</span>(readxl) <span class="co"># readxlの読み込み</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">require</span>(readxl) <span class="co"># tidyverseと一緒にインストールされるが起動はされない</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: readxl</code></pre>
 </div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>flnm <span class="ot">&lt;-</span> <span class="st">"~/Downloads/pokemon.xlsx"</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>tbl_p <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(flnm)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">colnames</span>(tbl_p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "ポケモン"   "HP"         "攻撃"       "防御"       "特攻"      
+ [6] "特防"       "速さ"       "type1"      "type2"      "type2有無" 
+[11] "高さ"       "重さ"       "捕獲"       "経験値"     "なつき数値"
+[16] "なつき度合" "メガ進化"  </code></pre>
 </div>
-<p>関数<code>require()</code>は，<code>library()</code>と 同様に，引数にパッケージの名前を指定すると，そのパッケージを 呼び出す（起動する）ことのできる関数です。 すでにインストールされているパッケージの名称は， オブジェクトのラベルなので，引数に指定する際には 引用符はいりません（文字列として扱う必要がないため ［引用符で囲んでもよい］）。</p>
-<p><code>require()</code>は， パッケージの読み込みに対するステータスに応じて， 真偽値を返し，失敗するとFALSEとなります。</p>
-<p>これでパッケージ<code>readxl</code>が使えるようになり， 関数<code>read_xlsx()</code>でExcelファイルが読み込めます。なお，<code>readxl::read_xlsx()</code>という 記法は，パッケージ<code>readxl</code>全体を使用可能にしなくても，その中に含まれる<code>read_xlsx()</code>だけ 使えるようにするものです。</p>
-<p>改めてデータを読み込みます。</p>
+</div>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># 今度は準備万端</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="co"># read:: とパッケージ名を付けなくてよい</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>tbl_j <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="at">path =</span> flnm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>tbl_p <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">select</span>(ポケモン, 速さ, HP)</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co"># 出力略</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>それでは，じゃんけんの結果を集計してみましょう。</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">自分</th>
-<th style="text-align: left;">勝ち</th>
-<th style="text-align: left;">あいこ</th>
-<th style="text-align: left;">負け</th>
-<th style="text-align: left;">Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">グー</td>
-<td style="text-align: left;">33.3% (3)</td>
-<td style="text-align: left;">33.3% (3)</td>
-<td style="text-align: left;">33.3% (3)</td>
-<td style="text-align: left;">30.0% (9)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">チョキ</td>
-<td style="text-align: left;">33.3% (3)</td>
-<td style="text-align: left;">44.4% (4)</td>
-<td style="text-align: left;">22.2% (2)</td>
-<td style="text-align: left;">30.0% (9)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">パー</td>
-<td style="text-align: left;">33.3% (4)</td>
-<td style="text-align: left;">16.7% (2)</td>
-<td style="text-align: left;">50.0% (6)</td>
-<td style="text-align: left;">40.0% (12)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Total</td>
-<td style="text-align: left;">33.3% (10)</td>
-<td style="text-align: left;">30.0% (9)</td>
-<td style="text-align: left;">36.7% (11)</td>
-<td style="text-align: left;">100.0% (30)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">自分</th>
-<th style="text-align: left;">勝ち</th>
-<th style="text-align: left;">あいこ</th>
-<th style="text-align: left;">負け</th>
-<th style="text-align: left;">Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">グー</td>
-<td style="text-align: left;">30.0% (3)</td>
-<td style="text-align: left;">33.3% (3)</td>
-<td style="text-align: left;">27.3% (3)</td>
-<td style="text-align: left;">30.0% (9)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">チョキ</td>
-<td style="text-align: left;">30.0% (3)</td>
-<td style="text-align: left;">44.4% (4)</td>
-<td style="text-align: left;">18.2% (2)</td>
-<td style="text-align: left;">30.0% (9)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">パー</td>
-<td style="text-align: left;">40.0% (4)</td>
-<td style="text-align: left;">22.2% (2)</td>
-<td style="text-align: left;">54.5% (6)</td>
-<td style="text-align: left;">40.0% (12)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Total</td>
-<td style="text-align: left;">33.3% (10)</td>
-<td style="text-align: left;">30.0% (9)</td>
-<td style="text-align: left;">36.7% (11)</td>
-<td style="text-align: left;">100.0% (30)</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>パッケージ<code>janitor</code>を使いました。 同様の表を作れるでしょうか。</p>
+<p>ここで<code>|&gt;</code>は<code>%&gt;%</code>と同じ<strong>パイプ演算子</strong>です。baseの（追加のパッケージが不要な）<strong>R</strong>で使用できます。</p>
+<p>変数を1つだけ，シンプルなベクトルとして取り出すには， 関数<code>pull()</code>を用います。 tibble形式のデータを受け取っても処理できない関数などに対して利用します。指定する変数は1つです。</p>
 </section>
-<section id="物件探し" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="物件探し"><span class="header-section-number">3.4</span> 物件探し</h2>
-<p>ファイル<code>kawauchi_0819.xlsx</code>は， リクルート社が運営する物件情報サイトsuumo（東北版）から， 2025年8月19日18:13時点でのデータをダウンロードした結果です。</p>
-<p>suumoのトップページから「賃貸」をクリックすると， 「通学・通勤時間から探す」という メニューがあります。この機能で 「通勤・通学先の最寄り駅」として「川内(宮城)」を選択し，「電車での所要時間」を「10分以内」 に設定，「乗換回数」は「こだわらない」で検索しました。</p>
-<p>検索時点では26,346件の物件が抽出されました。</p>
-<p>1ページに50物件を「建物ごとに表示」した状態で，1から71ページまで 以下の16のデータについて読み取った結果です（同じ建物に複数の賃貸物件（部屋）があるため， 「建物ごとに表示」の設定では，1ページに50物件の表示でも50部屋とは限らない）。</p>
-<p><img src="./images/ch03_rent.png" class="img-fluid"></p>
-<p>同じ物件で情報が重複していた場合（物件名, 区, 地番, タイプ, 広さ, 階数, 家賃, 管理費が同じ物件は，ひとつだけ残した）や， 最寄駅までバスに乗る物件， 階数の表示が非標準的であった物件（3-5階など）を除外した結果， 4,095件の物件に関するデータとなりました。</p>
-<p>最寄駅に関わる情報は，物件の最寄駅として最大3つ表示される駅のうち，最初の1つを対象としましたが，川内駅まで0分で到着する物件もあるため，データについてみなさんに意見を伺いたいです。 なお，表示の規則の詳細は不明ですが，対象とした最初の最寄駅が徒歩距離（分単位）で最短というわけでは 必ずしもなさそうです。ただし，短い時間が最初に表示される傾向はあるように見受けられました。</p>
-<p>また，階数には欠損値，<strong>欠測値</strong>（missing value）があります。 元の物件情報では表示が – となっていたデータです。おそらく戸建てだと思われます。 欠測値はExcelファイル上では空欄になっています。</p>
-<p>上記のデータを入力したExcelファイル <code>kawauchi_0819.xlsx</code> には， 1列目に，連番を示す「番号」を挿入しています。</p>
+<section id="効率的な取り出し方法" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="効率的な取り出し方法"><span class="header-section-number">4.1.3</span> 効率的な取り出し方法</h3>
+<p>変数名を指定するのではなく，列の番号でも指定可能です。 また，<code>select()</code>には変数の選択に便利な「お助け(helper)」関数，補助関数が用意されており， 効率的に変数を取り出せます。 詳細は <code>help(select)</code>として[Useful functions]の項を 参照してください。</p>
+<ol type="1">
+<li><code>starts_with()</code>：指定した文字列から始まる変数を取り出す</li>
+<li><code>ends_with()</code>：指定した文字列で終わる変数を取り出す</li>
+<li><code>matches()</code>： 指定の文字列（正規表現と呼ばれる特殊な指定も可）に合致する変数を取り出す</li>
+<li>記号<code> : </code>：あたかも数値列のように変数の 並びを表せる（<code>select(HP:速さ)</code>で6変数を選択可）</li>
+<li>記号<code> - </code>マイナスを変数名の前に付けると除外できる</li>
+</ol>
+</section>
+<section id="データの変換" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="データの変換"><span class="header-section-number">4.1.4</span> データの変換</h3>
+<p>918体のポケモンについて，それぞれの総合ステータスを求めましょう。 つまり，「HP」から「速さ」の値をポケモンごとに単純合計します。 データの変換には関数<code>mutate()</code>を使います。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>tbl_p2 <span class="ot">&lt;-</span> tbl_p <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2"></a> <span class="fu">mutate</span>(<span class="at">total=</span>HP<span class="sc">+</span>攻撃<span class="sc">+</span>防御<span class="sc">+</span>特攻<span class="sc">+</span>特防<span class="sc">+</span>速さ)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>記号<code>&lt;-</code>は右側を左側に格納する指示でしたが， 記号<code>%&gt;%</code>は右側<strong>へ</strong>左側<strong>を渡す</strong> 指示です。 つまり， データのオブジェクト<code>tbl_p</code> を関数<code>mutate()</code> に渡し，その結果をオブジェクト<code>tbl_p2</code> に格納しています。</p>
+<p>2行目の<code>mutate()</code>では， 新しい変数<code>total</code>を作成，定義 していますが， これは引数ではなく変数名なので，例えば「総合」にしたり 「種族値合計」にしたり好きに設定できます。</p>
+<p>変数<code>total</code>はHPから速さを足したものです。 パイプ演算子<code>%&gt;%</code>によってデータが <code>mutate()</code> に渡されているので，引用符なしで計算式を直接記述しています。</p>
+</section>
+<section id="偏差値での検討" class="level3" data-number="4.1.5">
+<h3 data-number="4.1.5" class="anchored" data-anchor-id="偏差値での検討"><span class="header-section-number">4.1.5</span> 偏差値での検討</h3>
+<p>数学と英語の成績を比較する際に偏差値がよく使われるのは， 数学と英語の平均点が同じとは限らず，数学の80点と英語の 80点を同じ「80」として比較できないからです。 また，散らばりの大きさも異なる可能性があるので， 1点の差が数学と英語で同じ保証もありません。 数学の最低点が79点，最高点が81点， 英語では最低点が5点，最高点95点のときの1点の違いを想像してみてください。</p>
+<p>ポケモンデータでも同じことがいえます。 「HP」と「攻撃」をそのままの値で比較するのは，数学と 英語の成績を直接比べるようなものです。そこで， <strong>標準得点</strong>（standard score） の考え方でデータを見直してみましょう。</p>
+<p>標準得点は，データを特定の平均と 散らばり（分散，または標準偏差の値）に変換し， 目盛(scale)を統一する<strong>標準化</strong>(standardization)の結果 として得られる値です。 データ分析においてよく使われるのは，平均を0，標準偏差を1とした 標準得点です。 平均を引いて，標準偏差で割ることで，数学も英語も「HP」も 「攻撃」もすべて平均0，標準偏差1に目盛が揃ったデータになります。</p>
+<p>偏差値も標準得点の1つです。 平均0，標準偏差1の標準得点を10倍し，50を足すと偏差値になります。 小数点以下の細かい表示を10倍して回避し，50を足して マイナスの値を解消しています。もともと平均が0，標準偏差が1だったので， 偏差値の平均は50，標準偏差は10です。</p>
+<p>では，偏差値を計算する関数を作ってみましょう。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>calculate_Hscore <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  z <span class="ot">&lt;-</span> (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
+<span id="cb10-3"><a href="#cb10-3"></a>  h <span class="ot">&lt;-</span> z <span class="sc">*</span> <span class="dv">10</span> <span class="sc">+</span> <span class="dv">50</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">return</span>(h)</span>
+<span id="cb10-5"><a href="#cb10-5"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>自作の関数<code>calculate_Hscore()</code>では， 引数<code>x</code>にデータを指定します。 <code>x</code>は2行目で平均が引かれ，標準偏差で割られるので， 平均0，標準偏差1に標準化されます。 それを10倍して50を足した結果を<code>h</code>として格納し， 関数<code>return()</code>で結果を返すようにしています。</p>
+<p>この関数を利用して，関数<code>mutate()</code>によるデータの変換を 以下のように行えば，数量データについて一括して 偏差値を計算可能です。 変数の指定にあたっては，関数<code>across()</code>では <code>select()</code>と同じように，tidy-selectと呼ばれる 変数選択のための補助関数など便利な機能が使用できます。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>tbl_p3 <span class="ot">&lt;-</span> tbl_p2 <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(HP<span class="sc">:</span>速さ, <span class="sc">~</span>{</span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="fu">calculate_Hscore</span>(.)</span>
+<span id="cb11-4"><a href="#cb11-4"></a>  }))</span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co"># tbl_p3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>上記の書き方では， 元の変数の内容が変更されますが， オリジナルの変数の値を保持しておきたい場合は <code>across()</code>の引数<code>.names</code> を利用して，例えば以下のように記述します。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>tbl_p2 <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(HP<span class="sc">:</span>速さ, <span class="sc">~</span>{</span>
+<span id="cb12-3"><a href="#cb12-3"></a>    <span class="fu">calculate_Hscore</span>(.)</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  }, <span class="at">.names =</span> <span class="st">"{.col}_h"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 918 × 24
+   ポケモン         HP  攻撃  防御  特攻  特防  速さ type1 type2 type2有無  高さ
+   &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
+ 1 フシギダネ       45    49    49    65    65    45 くさ  どく  あり        0.7
+ 2 フシギソウ       60    62    63    80    80    60 くさ  どく  あり        1  
+ 3 フシギバナ       80    82    83   100   100    80 くさ  どく  あり        2  
+ 4 メガフシギバナ……    80   100   123   122   120    80 くさ  どく  あり        2.4
+ 5 ヒトカゲ         39    52    43    60    50    65 ほのお…… なし  なし        0.6
+ 6 リザード         58    64    58    80    65    80 ほのお…… なし  なし        1.1
+ 7 リザードン       78    84    78   109    85   100 ほのお…… ひこう…… あり        1.7
+ 8 メガリザードンX……    78   130   111   130    85   100 ほのお…… ドラゴン… あり        1.7
+ 9 メガリザードンY……    78   104    78   159   115   100 ほのお…… ひこう…… あり        1.7
+10 ゼニガメ         44    48    65    50    64    43 みず  なし  なし        0.5
+# ℹ 908 more rows
+# ℹ 13 more variables: 重さ &lt;dbl&gt;, 捕獲 &lt;dbl&gt;, 経験値 &lt;dbl&gt;, なつき数値 &lt;dbl&gt;,
+#   なつき度合 &lt;chr&gt;, メガ進化 &lt;chr&gt;, total &lt;dbl&gt;, HP_h &lt;dbl&gt;, 攻撃_h &lt;dbl&gt;,
+#   防御_h &lt;dbl&gt;, 特攻_h &lt;dbl&gt;, 特防_h &lt;dbl&gt;, 速さ_h &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>これにより，元の変数名それぞれに自動的に<code>_h</code>が付されます。 もちろん，<code>_h</code>の部分は好きな文字列で構いません。</p>
+<p><code>“{.col}_h”</code>の<code>{.col}</code>は， 文字列表示に関わる<code>glue</code>というパッケージが 提供する記法で，変数名を表します。</p>
+<p><code>across()</code>によって各変数に適用したい処理は， 通常の関数の使用と同様にカッコを付し，ドットを指定します。 ただし，関数の前に<code> ~ </code>が必要です。</p>
+<p>各偏差値を合計した結果と「HP」などの値をそのまま合計した総合ステータスには どのような違いがあるか，モンスター分析編で検討する準備として， ここでは偏差値の合計を計算し，新たな変数<code>h_total</code> を作成しておきましょう。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>tbl_h <span class="ot">&lt;-</span> tbl_p2 <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">mutate</span>(<span class="at">h_total=</span>HP<span class="sc">+</span>攻撃<span class="sc">+</span>防御<span class="sc">+</span>特攻<span class="sc">+</span>特防<span class="sc">+</span>速さ)</span>
+<span id="cb14-3"><a href="#cb14-3"></a>tbl_h <span class="sc">|&gt;</span> <span class="fu">select</span>(ポケモン, total, h_total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 918 × 3
+   ポケモン        total h_total
+   &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;
+ 1 フシギダネ        318     318
+ 2 フシギソウ        405     405
+ 3 フシギバナ        525     525
+ 4 メガフシギバナ    625     625
+ 5 ヒトカゲ          309     309
+ 6 リザード          405     405
+ 7 リザードン        534     534
+ 8 メガリザードンX   634     634
+ 9 メガリザードンY   634     634
+10 ゼニガメ          314     314
+# ℹ 908 more rows</code></pre>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -820,13 +813,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./R_basics1.html" class="pagination-link" aria-label="**R**の基礎">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>R</strong>の基礎</span></span>
+      <a href="./R_basics2.html" class="pagination-link" aria-label="Rによるデータ分析">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rによるデータ分析</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./handling.html" class="pagination-link" aria-label="handling.html">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">handling.html</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./path1.html" class="pagination-link" aria-label="パスモデル">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">パスモデル</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

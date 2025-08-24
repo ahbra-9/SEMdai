@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; パスモデル – 教育測定学研究演習II</title>
+<title>5&nbsp; パスモデル – 教育測定学研究演習II</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./summary.html" rel="next">
-<link href="./intro.html" rel="prev">
+<link href="./handling.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -146,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./path1.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">パスモデル</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./path1.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">パスモデル</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -185,14 +185,32 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./R_basics1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>R</strong>の基礎</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R_basics2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rによるデータ分析</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./handling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">データハンドリング</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./path1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">パスモデル</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">パスモデル</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -211,19 +229,19 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#パス図" id="toc-パス図" class="nav-link active" data-scroll-target="#パス図"><span class="header-section-number">2.1</span> パス図</a></li>
-  <li><a href="#パスモデルとしての重回帰分析" id="toc-パスモデルとしての重回帰分析" class="nav-link" data-scroll-target="#パスモデルとしての重回帰分析"><span class="header-section-number">2.2</span> パスモデルとしての重回帰分析</a></li>
-  <li><a href="#相関係数のパラメータ表示" id="toc-相関係数のパラメータ表示" class="nav-link" data-scroll-target="#相関係数のパラメータ表示"><span class="header-section-number">2.3</span> 相関係数のパラメータ表示</a></li>
-  <li><a href="#トレーシングルール" id="toc-トレーシングルール" class="nav-link" data-scroll-target="#トレーシングルール"><span class="header-section-number">2.4</span> トレーシングルール</a></li>
-  <li><a href="#パス係数の値" id="toc-パス係数の値" class="nav-link" data-scroll-target="#パス係数の値"><span class="header-section-number">2.5</span> パス係数の値</a></li>
-  <li><a href="#決定係数" id="toc-決定係数" class="nav-link" data-scroll-target="#決定係数"><span class="header-section-number">2.6</span> 決定係数</a></li>
-  <li><a href="#間接効果" id="toc-間接効果" class="nav-link" data-scroll-target="#間接効果"><span class="header-section-number">2.7</span> 間接効果</a></li>
-  <li><a href="#r-による分析" id="toc-r-による分析" class="nav-link" data-scroll-target="#r-による分析"><span class="header-section-number">2.8</span> <strong>R</strong> による分析</a>
+  <li><a href="#パス図" id="toc-パス図" class="nav-link active" data-scroll-target="#パス図"><span class="header-section-number">5.1</span> パス図</a></li>
+  <li><a href="#パスモデルとしての重回帰分析" id="toc-パスモデルとしての重回帰分析" class="nav-link" data-scroll-target="#パスモデルとしての重回帰分析"><span class="header-section-number">5.2</span> パスモデルとしての重回帰分析</a></li>
+  <li><a href="#相関係数のパラメータ表示" id="toc-相関係数のパラメータ表示" class="nav-link" data-scroll-target="#相関係数のパラメータ表示"><span class="header-section-number">5.3</span> 相関係数のパラメータ表示</a></li>
+  <li><a href="#トレーシングルール" id="toc-トレーシングルール" class="nav-link" data-scroll-target="#トレーシングルール"><span class="header-section-number">5.4</span> トレーシングルール</a></li>
+  <li><a href="#パス係数の値" id="toc-パス係数の値" class="nav-link" data-scroll-target="#パス係数の値"><span class="header-section-number">5.5</span> パス係数の値</a></li>
+  <li><a href="#決定係数" id="toc-決定係数" class="nav-link" data-scroll-target="#決定係数"><span class="header-section-number">5.6</span> 決定係数</a></li>
+  <li><a href="#間接効果" id="toc-間接効果" class="nav-link" data-scroll-target="#間接効果"><span class="header-section-number">5.7</span> 間接効果</a></li>
+  <li><a href="#r-による分析" id="toc-r-による分析" class="nav-link" data-scroll-target="#r-による分析"><span class="header-section-number">5.8</span> <strong>R</strong> による分析</a>
   <ul class="collapse">
-  <li><a href="#相関係数行列の入力" id="toc-相関係数行列の入力" class="nav-link" data-scroll-target="#相関係数行列の入力"><span class="header-section-number">2.8.1</span> 相関係数行列の入力</a></li>
-  <li><a href="#モデル式" id="toc-モデル式" class="nav-link" data-scroll-target="#モデル式"><span class="header-section-number">2.8.2</span> モデル式</a></li>
-  <li><a href="#分析の実行" id="toc-分析の実行" class="nav-link" data-scroll-target="#分析の実行"><span class="header-section-number">2.8.3</span> 分析の実行</a></li>
-  <li><a href="#実習" id="toc-実習" class="nav-link" data-scroll-target="#実習"><span class="header-section-number">2.8.4</span> 実習</a></li>
+  <li><a href="#相関係数行列の入力" id="toc-相関係数行列の入力" class="nav-link" data-scroll-target="#相関係数行列の入力"><span class="header-section-number">5.8.1</span> 相関係数行列の入力</a></li>
+  <li><a href="#モデル式" id="toc-モデル式" class="nav-link" data-scroll-target="#モデル式"><span class="header-section-number">5.8.2</span> モデル式</a></li>
+  <li><a href="#分析の実行" id="toc-分析の実行" class="nav-link" data-scroll-target="#分析の実行"><span class="header-section-number">5.8.3</span> 分析の実行</a></li>
+  <li><a href="#実習" id="toc-実習" class="nav-link" data-scroll-target="#実習"><span class="header-section-number">5.8.4</span> 実習</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -233,7 +251,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">パスモデル</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">パスモデル</span></h1>
 </div>
 
 
@@ -250,8 +268,8 @@ window.Quarto = {
 </header>
 
 
-<section id="パス図" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="パス図"><span class="header-section-number">2.1</span> パス図</h2>
+<section id="パス図" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="パス図"><span class="header-section-number">5.1</span> パス図</h2>
 <p><strong>パスモデル</strong>（path models），<strong>パス解析</strong>（path analysis）を通じて，<strong>パス図</strong>（path diagram）の考え方を習得し，回帰分析より柔軟なモデル構成に進みましょう。</p>
 <p>以下は，変数間の影響関係を記述するモデル式をグラフィカルに示す，パス図と呼ばれる描画手法 に用いられる記号，部品を示したものです。 <img src="./images/path_diagram_symbols.png" class="img-fluid" style="width:85.0%"></p>
 <p>モデル式とパス図は一対一に対応します。AMOS（<strong>A</strong>nalysis of <strong>MO</strong>ment <strong>S</strong>tructures; 積率構造分析）というソフトウェアが「お絵かきソフト」のように図を描くことでSEMが実行できるのも，このため（パス図を描けばモデル式が出力可能）です。なお，その特質が手法をおおいに普及させた，という側面もあります。</p>
@@ -260,8 +278,8 @@ window.Quarto = {
 <p>単方向の矢印で変数間を結び，両者の影響関係を表します。矢印を出す側が独立変数（説明変数）で，矢印を受ける側が従属変数（目的変数）です。その影響の程度，すなわち回帰分析における回帰係数を，パスモデルでは<strong>パス係数</strong>（path coefficients）と呼び，矢印の上に表記します。</p>
 <p>双方向矢印は共変動の関係を表します。すなわち相関係数や共分散です。なお，単方向の矢印が２変数の間でお互いに向き合う（<span class="math inline">\(X\)</span>が<span class="math inline">\(Y\)</span>に影響し，<span class="math inline">\(Y\)</span>が<span class="math inline">\(X\)</span>に影響する）というモデルを構成することは（基本的には）できません。</p>
 </section>
-<section id="パスモデルとしての重回帰分析" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="パスモデルとしての重回帰分析"><span class="header-section-number">2.2</span> パスモデルとしての重回帰分析</h2>
+<section id="パスモデルとしての重回帰分析" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="パスモデルとしての重回帰分析"><span class="header-section-number">5.2</span> パスモデルとしての重回帰分析</h2>
 <p>3つの独立変数から1つの従属変数を説明，予測する重回帰モデル <span class="math display">\[y = i + ax_1+bx_2+cx_3+誤差\]</span> を考えましょう。図の表記の便宜上，切片を <span class="math inline">\(i\)</span> とし，<span class="math inline">\(e\)</span> として表されることの多い誤差項を <span class="math inline">\(誤差\)</span> と表すこととします。</p>
 <p>例えば，親の収入（<span class="math inline">\(x_1\)</span>）と学業成績（<span class="math inline">\(x_2\)</span>）と学業上の向上心（<span class="math inline">\(x_3\)</span>）が，定量的に把握できる達成度（<span class="math inline">\(y\)</span>）に与える影響の分析を想定します。</p>
 <p>パス図で表すと以下の通りです。</p>
@@ -272,8 +290,8 @@ window.Quarto = {
 <p><img src="./images/ch05_cormat4.png" class="img-fluid" style="width:75.0%"></p>
 <p>重回帰モデルは切片を除いて <span class="math display">\[y = ax_1+bx_2+cx_3+誤差\]</span> と表され，三角形と矢印と <span class="math inline">\(i\)</span> を除いたものが該当のパス図になります。</p>
 </section>
-<section id="相関係数のパラメータ表示" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="相関係数のパラメータ表示"><span class="header-section-number">2.3</span> 相関係数のパラメータ表示</h2>
+<section id="相関係数のパラメータ表示" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="相関係数のパラメータ表示"><span class="header-section-number">5.3</span> 相関係数のパラメータ表示</h2>
 <p>ここで，4変数間の相関係数と，（定数項を除いた）パス図の対応を考えましょう。</p>
 <p>相関係数行列は，４つの変数の連動関係を示しています。そこに方向はありません。</p>
 <p>一方で，取り上げているパスモデル（重回帰モデル）においては，<span class="math inline">\(a\)</span>，<span class="math inline">\(b\)</span>，<span class="math inline">\(c\)</span> のパス係数（標準化偏回帰係数）と独立変数間の相関係数 <span class="math inline">\(d\)</span>，<span class="math inline">\(e\)</span>，<span class="math inline">\(f\)</span>，誤差の分散（標準偏差） <span class="math inline">\(g\)</span> といったモデルを特徴づけるパラメータが導入され，変数 <span class="math inline">\(y\)</span>（達成度）は他の3つの影響を受けて値が変化する，という考え（仮説，モデル） が示されています。</p>
@@ -281,8 +299,8 @@ window.Quarto = {
 x_1 と y \ の相関 = a + (d \times b) + (e\times c)
 \]</span> のように再表現したということです。<span class="math inline">\(x_1\)</span> と <span class="math inline">\(y\)</span> はどのように連結（相関）しているのか，<strong>トレーシングルール</strong>（tracing rules）と呼ばれる考え方で，適切な <span class="math inline">\(x_1\)</span> と <span class="math inline">\(y\)</span> の経路（パス）を特定し，上式の関係を導くことができます。</p>
 </section>
-<section id="トレーシングルール" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="トレーシングルール"><span class="header-section-number">2.4</span> トレーシングルール</h2>
+<section id="トレーシングルール" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="トレーシングルール"><span class="header-section-number">5.4</span> トレーシングルール</h2>
 <p>パス図において，２つの変数または１つの変数に注目し，その変数に至るパスを辿って，各パスの係数を掛け，可能なパスすべての結果を足し合わせます。ただし，</p>
 <ul>
 <li><p>単方向矢印を逆向きに辿り始めることは可能ですが，順行したらもう逆行はできません。</p></li>
@@ -294,8 +312,8 @@ x_1 と y \ の相関 = a + (d \times b) + (e\times c)
 \]</span> となります。　</p>
 <p><span class="math inline">\((d \times f \times c)\)</span> もパスとしてはあるではないか，と思われるかもしれませんが（私は初見そう思った<span class="math inline">\(\cdots\)</span>），これは「双方向矢印は最大でも１つしか含められない」に抵触するため採用できません。</p>
 </section>
-<section id="パス係数の値" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="パス係数の値"><span class="header-section-number">2.5</span> パス係数の値</h2>
+<section id="パス係数の値" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="パス係数の値"><span class="header-section-number">5.5</span> パス係数の値</h2>
 <p>同様（ぜひ確認してみましょう）にして，各独立変数と従属変数の相関係数について以下が得られます。 <span class="math display">\[\begin{align*}
 x_1 と y \ の相関 = a + (d \times b) + (e\times c)\\
 x_2 と y \ の相関 = b + (d \times a) + (f\times c)\\
@@ -330,8 +348,8 @@ x_1 と y \ の相関 =&amp;
 \end{align*}\]</span> となり，丸め誤差はありますが相関係数が復元されます。</p>
 <p>同様に，<span class="math inline">\(x_2\)</span> と <span class="math inline">\(y\)</span> の相関は<span class="math inline">\(0.536\)</span>，<span class="math inline">\(x_3\)</span>と<span class="math inline">\(y\)</span>は<span class="math inline">\(0.504\)</span>です。</p>
 </section>
-<section id="決定係数" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="決定係数"><span class="header-section-number">2.6</span> 決定係数</h2>
+<section id="決定係数" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="決定係数"><span class="header-section-number">5.6</span> 決定係数</h2>
 <p>先に，「パス図において，２つの変数または<em>１つの変数</em>に注目し，その変数に至るパスを辿って，各パスの係数を掛け，可能なパスすべての結果を足し合わせる」ことをトレーシングルールとして示しました。</p>
 <p>従属変数 <span class="math inline">\(y\)</span> について，<span class="math inline">\(y\)</span> 自身に至るパスを考えてみましょう。自分との共分散（相関）ですから，すなわち <span class="math inline">\(y\)</span> の分散（標準偏差）です。</p>
 <p>順行するまでは逆行できるので，<span class="math inline">\(x_1\)</span> に行って <span class="math inline">\(y\)</span> に戻ってくる経路 <span class="math inline">\(a \times a\)</span> がまず考えられます。<span class="math inline">\(b^2\)</span>，<span class="math inline">\(c^2\)</span> も同様です。</p>
@@ -352,18 +370,18 @@ g=0.38
 R^2=0.62
 \]</span> であることがわかります。</p>
 </section>
-<section id="間接効果" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="間接効果"><span class="header-section-number">2.7</span> 間接効果</h2>
+<section id="間接効果" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="間接効果"><span class="header-section-number">5.7</span> 間接効果</h2>
 <p>重回帰モデルしか分析手法がない場合とくらべて， パスモデルでは，例えば３つの変数の関係を以下のように表すことができます。</p>
 <p><img src="./images/ch05_path_seq.png" class="img-fluid" style="width:75.0%"></p>
 <p><img src="./images/ch05_path_two.png" class="img-fluid" style="width:75.0%"></p>
 <p><img src="./images/ch05_path_indirect.png" class="img-fluid" style="width:75.0%"></p>
 <p>このように柔軟にモデル構成ができると，重回帰モデルにはなかったタイプの変数の影響を考えることができます。<strong>間接効果</strong> （indirect effect）と呼ばれる波及効果です。 間接効果は，ひとつの影響が，他の変数を経由して複合的に及びます。 例えば，一番上の図の <span class="math inline">\((a \times b)\)</span> や一番下の <span class="math inline">\((a \times b)\)</span> が間接効果にあたります。</p>
 </section>
-<section id="r-による分析" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="r-による分析"><span class="header-section-number">2.8</span> <strong>R</strong> による分析</h2>
-<section id="相関係数行列の入力" class="level3" data-number="2.8.1">
-<h3 data-number="2.8.1" class="anchored" data-anchor-id="相関係数行列の入力"><span class="header-section-number">2.8.1</span> 相関係数行列の入力</h3>
+<section id="r-による分析" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="r-による分析"><span class="header-section-number">5.8</span> <strong>R</strong> による分析</h2>
+<section id="相関係数行列の入力" class="level3" data-number="5.8.1">
+<h3 data-number="5.8.1" class="anchored" data-anchor-id="相関係数行列の入力"><span class="header-section-number">5.8.1</span> 相関係数行列の入力</h3>
 <p>パスモデル（SEM）の枠組みでの分析には，<strong>R</strong>のパッケージ<em>lavaan</em>（<em>la</em> tent <em>va</em> riable <em>an</em> lysis）を使用します。</p>
 <p>まず，相関係数行列を読み込みます。<em>lavaan</em>の関数<code>lav_matrix_lower2full()</code>を利用すれば， 下三角行列の状態で入力しても問題ありません。 データフレームでなくても，行名と列名を付すことで分析データとして使用できます。</p>
 <div class="cell">
@@ -400,8 +418,8 @@ y  0.78 0.53 0.50 1.00</code></pre>
 </div>
 <p>上のように，分析対象の相関係数行列を用意できました。</p>
 </section>
-<section id="モデル式" class="level3" data-number="2.8.2">
-<h3 data-number="2.8.2" class="anchored" data-anchor-id="モデル式"><span class="header-section-number">2.8.2</span> モデル式</h3>
+<section id="モデル式" class="level3" data-number="5.8.2">
+<h3 data-number="5.8.2" class="anchored" data-anchor-id="モデル式"><span class="header-section-number">5.8.2</span> モデル式</h3>
 <p>続いてモデル式を記述します。</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -428,8 +446,8 @@ y  0.78 0.53 0.50 1.00</code></pre>
 <p><code>lavaan()</code>では，モデルで直接推定される係数以外に，モデル内のパラメータを使って新しいパラメータを定義することができます。このモデルにはありませんが，間接効果を定義可能です。記号は <code>:=</code> を使います。例えば，親の収入 <span class="math inline">\(x_1\)</span> の多寡が学業上の向上心 <span class="math inline">\(x_2\)</span> を変化させ，その影響が達成度 <span class="math inline">\(y\)</span> に及ぶ，というモデルの場合，各々のパス係数が <span class="math inline">\(a\)</span> と <span class="math inline">\(b\)</span> であった場合，<code>y ~ a*x1 + b*x2</code> のように，パス係数にラベルをつけた上で， <code>ind_eff := a * c</code>のように記述します。<code>ind_eff</code>は私がつけたラベルで，他でももちろんかまいません。また，<code>a * c</code>の<code>*</code>はラベル付けではなく，係数を掛け合わせて間接効果を表しています。</p>
 <p>まとめると，以下の通りです。 <img src="./images/ch05_tab_syntax.png" class="img-fluid" style="width:90.0%"></p>
 </section>
-<section id="分析の実行" class="level3" data-number="2.8.3">
-<h3 data-number="2.8.3" class="anchored" data-anchor-id="分析の実行"><span class="header-section-number">2.8.3</span> 分析の実行</h3>
+<section id="分析の実行" class="level3" data-number="5.8.3">
+<h3 data-number="5.8.3" class="anchored" data-anchor-id="分析の実行"><span class="header-section-number">5.8.3</span> 分析の実行</h3>
 <p>パッケージ<em>lavaan</em>には，その名と同じ，SEMの分析に汎用的に使える関数<code>lavaan()</code>がありますが，ここでは以下のように関数<code>sem()</code>を使って推定を行います。<code>sem()</code>は<code>lavaan()</code>のラッパー関数です。いくつかの引数が，ここでの分析に適切な形であらかじめ設定されています。詳しくは<code>?sem()</code>で確認しましょう。</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -505,8 +523,8 @@ R-Square:
 </ul>
 <p>です。ここでは<code>rsquare=TRUE</code>とし，従属変数の決定係数（のみ）を確認しましたが，基本的には上記4つすべて<code>TRUE</code>にしておきましょう。</p>
 </section>
-<section id="実習" class="level3" data-number="2.8.4">
-<h3 data-number="2.8.4" class="anchored" data-anchor-id="実習"><span class="header-section-number">2.8.4</span> 実習</h3>
+<section id="実習" class="level3" data-number="5.8.4">
+<h3 data-number="5.8.4" class="anchored" data-anchor-id="実習"><span class="header-section-number">5.8.4</span> 実習</h3>
 <ol type="1">
 <li>4変数の相関行列を使って以下のパス図の分析をしなさい。間接効果も定義し，検討すること。 <img src="./images/ch05_path_achieve.png" class="img-fluid" style="width:85.0%"></li>
 </ol>
@@ -917,13 +935,13 @@ R-Square:
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./intro.html" class="pagination-link" aria-label="オリエンテーション">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">オリエンテーション</span></span>
+      <a href="./handling.html" class="pagination-link" aria-label="データハンドリング">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">データハンドリング</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./summary.html" class="pagination-link" aria-label="Summary">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
