@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="担当：中村健太郎">
-<meta name="dcterms.date" content="2025-08-25">
 
-<title>教育測定学研究演習II</title>
+<title>sem2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,223 +23,112 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./intro.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ffffa96520c6cf7ec6bfd4297e4347f0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2bcba6c496c817d1f95d9bfa6227460e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
-  }
-}</script>
+<script src="sem2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="sem2_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="sem2_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="sem2_files/libs/quarto-html/popper.min.js"></script>
+<script src="sem2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="sem2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="sem2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="sem2_files/libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="sem2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="sem2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="sem2_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="fullcontent quarto-light">
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">はじめに</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
-<!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">教育測定学研究演習II</a> 
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">はじめに</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">オリエンテーション</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./R_basics1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>R</strong>の基礎</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./R_basics2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rによるデータ分析</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./handling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">データハンドリング</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./path1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">パスモデル</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./sem1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">潜在変数モデル</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#はじめに" id="toc-はじめに" class="nav-link active" data-scroll-target="#はじめに">はじめに</a></li>
-  </ul>
-</nav>
-    </div>
-<!-- main -->
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">教育測定学研究演習II</h1>
-<p class="subtitle lead">東北大学大学院教育学研究科</p>
-</div>
 
 
 
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>担当：中村健太郎 </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 25, 2025</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="はじめに" class="level1 unnumbered">
-<h1 class="unnumbered">はじめに</h1>
-<p>この資料は，東北大学大学院教育学研究科2025年度集中講義「教育測定学研究演習II」のためのものです。</p>
-<p>シラバスは以下の通りですが，集中講義という形式でもあり，受講者のみなさんの興味や関心などから柔軟に変更したいと考えています。</p>
+<section id="多母集団同時解析" class="level2">
+<h2 class="anchored" data-anchor-id="多母集団同時解析">多母集団同時解析</h2>
+<section id="複数グループの比較" class="level3">
+<h3 class="anchored" data-anchor-id="複数グループの比較">複数グループの比較</h3>
+<p>ここでは集団間の違いを検討する<strong>平均共分散構造分析</strong>を扱います。 潜在変数に平均を導入する際には，これまでと異なり 観測変数の切片（独立変数の場合には平均）もモデルに組み込む必要があります。</p>
+<p>平均共分散構造分析のパス図の例は，以下の通りです。</p>
+<p><img src="./images/ch07_meansem.png" class="img-fluid" style="width:95.0%"></p>
+<p>変数から定数項へのトレーシングルールとして，以下が追加されます。</p>
+<ul>
+<li>辿れるのは単方向矢印のみ</li>
+<li>矢印の逆行しかできない</li>
+</ul>
+<p>例えば，上図の<span class="math inline">\(x_1\)</span>の平均<span class="math inline">\(\bar{x}_1\)</span>は以下の通りです。 <span class="math display">\[
+\bar{x}_1 = a_1 \times \mu + m_1
+\]</span></p>
+<p>観測変数の平均が，<span class="math inline">\(a_1 \times \mu\)</span>という潜在変数による成分（平均）と<span class="math inline">\(x_1\)</span>独自の成分（切片）で表され，構造化されていることがわかります。</p>
+</section>
+<section id="測定の不変性" class="level3">
+<h3 class="anchored" data-anchor-id="測定の不変性">測定の不変性</h3>
+<p>母集団の比較では，集団間の同質性についていくつかのレベルで考えます。</p>
 <ol type="1">
-<li>オリエンテーション</li>
-<li>Rと測定論の基礎1</li>
-<li>Rと測定論の基礎2</li>
-<li>回帰分析1</li>
-<li>回帰分析2</li>
-<li>回帰分析の演習</li>
-<li>因子分析1</li>
-<li>因子分析2</li>
-<li>因子分析の演習</li>
-<li>測定の信頼性</li>
-<li>SEM1</li>
-<li>SEM2</li>
-<li>SEM3</li>
-<li>SEMの演習</li>
-<li>まとめ</li>
+<li>配置不変</li>
+<li>弱い測定不変</li>
+<li>強い測定不変</li>
+<li>厳格な測定不変</li>
 </ol>
-<p>講義全体の目的は，構造方程式モデリング（Structural Equation Modeling; SEM）と呼ばれる汎用性の高い統計分析モデルを実践的に理解し， 自分の研究に役立てられるようになることです。</p>
-<p><strong>R</strong>を使って実際に分析できるように，<strong>R</strong>の基本的な考え方から 回帰分析，パス解析，因子分析を取り上げ，潜在変数を伴うパス解析とも呼ばれるSEMを<strong>R</strong>で実行できるよう実習します。</p>
-<p><strong>R</strong>は非常に高機能な統計解析用の言語ですが， さらに機能を拡張し，SEMを自在に分析できるように <code>lavaan</code>（<strong>la</strong>tent <strong>va</strong>riable <strong>an</strong>alysis）というパッケージを導入します。 その他にも分析に役立つパッケージを紹介する予定です。</p>
-<p>１日目は導入と<strong>R</strong>の基本的な操作， ２日目は回帰分析とパス解析モデル， ３日目で因子分析モデルと基本的なSEMを扱い， ４日目で少し拡張的なSEMまで進む予定です。</p>
-<p>訳の分からない暑さの中，せっかくの機会なので， みなさんのお役に立てるようがんばります。 ４日間よろしくお願いします。</p>
-
-
+<p><strong>配置不変</strong>は最も基本となるレベルです。異なる集団で少なくとも同じモデル（変数間の構造）が成り立っている状況です。 パス係数などが等しいかどうかは問いません。</p>
+<p><strong>測定不変</strong>は集団間の観測変数の母数に関して， どこまで等しいといえるかでレベルが異なります。</p>
+<p><strong>弱い測定不変</strong>は，潜在変数の分散は異なるが，潜在変数からの負荷量が集団間で等しいといえる状況です。 潜在変数の分散と共分散の比較を可能とします。</p>
+<p><strong>強い測定不変</strong>は，観測変数の切片も等しい，とするものです。観測変数で揃えることで，潜在変数の平均，分散，共分散が異なるかどうかを検討可能になります。 この段階で，潜在変数間に違いがみられるのであれば， それは観測変数による測定の違いではなく，潜在変数の分布に 本質的な違いがあるといえます。</p>
+<p><strong>厳格な測定不変</strong>は，観測変数の誤差分散が集団間で等しい，というものです。潜在変数をモデル比較する上では，通常要求されない水準の不変性です。</p>
+</section>
+<section id="部分的な不変性" class="level3">
+<h3 class="anchored" data-anchor-id="部分的な不変性">部分的な不変性</h3>
+<p>すべての観測変数については不変性を示せない場合， 適合度の観点から，いずれの観測変数に不変性が想定できないか 特定（それ以外は成り立っていることを確認）します。 その上で，以下のような可能性を検討します。</p>
+<ol type="1">
+<li>潜在変数の比較の土台は十分であることを示しつつ，当該観測変数の等値制約は外す。</li>
+<li>違いはわずかであることを確認し，等値制約はそのままにする</li>
+<li>当該観測変数を分析から除外し，再推定する。</li>
+<li>集団間で異なる構成概念を測定しているものとして結論づける。</li>
+</ol>
+<p>実践的には，1や2の観点から部分的な不変性のもとで検討を進めます。</p>
+</section>
+<section id="不変性の検討" class="level3">
+<h3 class="anchored" data-anchor-id="不変性の検討">不変性の検討</h3>
+<p><span class="math inline">\(\chi^2\)</span>統計量の変化について検定を行うものがありますが，サンプルサイズの影響などから，実施されても結果を重視しない傾向があります。</p>
+<p>自らの仮説をベースに，それぞれのモデルの適合度指標を検討し， 「より良い」というよりは，実質科学的に「認めうる」不変性を示しつつ，潜在変数の集団間の比較検討を行うこととなります。</p>
+<p>適合度指標には，CFIやRMSEA，AIC/BICなどを利用します。</p>
+</section>
 </section>
 
-</main> <!-- /main -->
+</main>
+<!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -641,15 +528,6 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./intro.html" class="pagination-link" aria-label="オリエンテーション">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">オリエンテーション</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
