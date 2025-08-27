@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; 多母集団同時解析 – 教育測定学研究演習II</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./summary.html" rel="next">
+<link href="./sem1.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ffffa96520c6cf7ec6bfd4297e4347f0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2bcba6c496c817d1f95d9bfa6227460e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sem2.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">多母集団同時解析</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">教育測定学研究演習II</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">はじめに</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">オリエンテーション</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R_basics1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>R</strong>の基礎</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R_basics2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rによるデータ分析</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./handling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">データハンドリング</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./path1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">パスモデル</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sem1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">潜在変数モデル</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sem2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">多母集団同時解析</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#複数グループの比較" id="toc-複数グループの比較" class="nav-link active" data-scroll-target="#複数グループの比較"><span class="header-section-number">7.1</span> 複数グループの比較</a></li>
+  <li><a href="#測定の不変性" id="toc-測定の不変性" class="nav-link" data-scroll-target="#測定の不変性"><span class="header-section-number">7.2</span> 測定の不変性</a></li>
+  <li><a href="#部分的な不変性" id="toc-部分的な不変性" class="nav-link" data-scroll-target="#部分的な不変性"><span class="header-section-number">7.3</span> 部分的な不変性</a></li>
+  <li><a href="#構造方程式モデリングにおける適合度" id="toc-構造方程式モデリングにおける適合度" class="nav-link" data-scroll-target="#構造方程式モデリングにおける適合度"><span class="header-section-number">7.4</span> 構造方程式モデリングにおける適合度</a>
+  <ul class="collapse">
+  <li><a href="#適合度指標" id="toc-適合度指標" class="nav-link" data-scroll-target="#適合度指標"><span class="header-section-number">7.4.1</span> 適合度指標</a></li>
+  <li><a href="#なぜ重要か" id="toc-なぜ重要か" class="nav-link" data-scroll-target="#なぜ重要か"><span class="header-section-number">7.4.2</span> なぜ重要か</a></li>
+  <li><a href="#適合度指標の分類" id="toc-適合度指標の分類" class="nav-link" data-scroll-target="#適合度指標の分類"><span class="header-section-number">7.4.3</span> 適合度指標の分類</a></li>
+  <li><a href="#絶対的適合度指標-absolute-fit-indices" id="toc-絶対的適合度指標-absolute-fit-indices" class="nav-link" data-scroll-target="#絶対的適合度指標-absolute-fit-indices"><span class="header-section-number">7.4.4</span> 絶対的適合度指標 (Absolute Fit Indices)</a></li>
+  <li><a href="#主要指標" id="toc-主要指標" class="nav-link" data-scroll-target="#主要指標"><span class="header-section-number">7.4.5</span> 主要指標</a></li>
+  <li><a href="#絶対適合度指標の詳細" id="toc-絶対適合度指標の詳細" class="nav-link" data-scroll-target="#絶対適合度指標の詳細"><span class="header-section-number">7.4.6</span> 絶対適合度指標の詳細</a></li>
+  <li><a href="#増分的適合度指標-incremental-fit-indices" id="toc-増分的適合度指標-incremental-fit-indices" class="nav-link" data-scroll-target="#増分的適合度指標-incremental-fit-indices"><span class="header-section-number">7.4.7</span> 増分的適合度指標 (Incremental Fit Indices)</a></li>
+  <li><a href="#倹約的適合度指標-parsimony-fit-indices" id="toc-倹約的適合度指標-parsimony-fit-indices" class="nav-link" data-scroll-target="#倹約的適合度指標-parsimony-fit-indices"><span class="header-section-number">7.4.8</span> 倹約的適合度指標 (Parsimony Fit Indices)</a></li>
+  <li><a href="#適合度指標使用上の注意点" id="toc-適合度指標使用上の注意点" class="nav-link" data-scroll-target="#適合度指標使用上の注意点"><span class="header-section-number">7.4.9</span> 適合度指標使用上の注意点</a></li>
+  <li><a href="#重要な注意点" id="toc-重要な注意点" class="nav-link" data-scroll-target="#重要な注意点"><span class="header-section-number">7.4.10</span> 重要な注意点</a></li>
+  <li><a href="#推奨される適合度評価の手順" id="toc-推奨される適合度評価の手順" class="nav-link" data-scroll-target="#推奨される適合度評価の手順"><span class="header-section-number">7.4.11</span> 推奨される適合度評価の手順</a></li>
+  </ul></li>
+  <li><a href="#不変性の検討" id="toc-不変性の検討" class="nav-link" data-scroll-target="#不変性の検討"><span class="header-section-number">7.5</span> 不変性の検討</a></li>
+  <li><a href="#rでの検討" id="toc-rでの検討" class="nav-link" data-scroll-target="#rでの検討"><span class="header-section-number">7.6</span> <strong>R</strong>での検討</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">多母集団同時解析</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="複数グループの比較" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="複数グループの比較"><span class="header-section-number">7.1</span> 複数グループの比較</h2>
+<p>ここでは集団間の違いを検討する<strong>平均共分散構造分析</strong>を扱います。 潜在変数に平均を導入する際には，これまでと異なり 観測変数の切片（独立変数の場合には平均）もモデルに組み込む必要があります。</p>
+<p>平均共分散構造分析のパス図の例は，以下の通りです。</p>
+<p><img src="./images/ch07_meansem.png" class="img-fluid" style="width:95.0%"></p>
+<p>変数から定数項へのトレーシングルールとして，以下が追加されます。</p>
+<ul>
+<li>辿れるのは単方向矢印のみ</li>
+<li>矢印の逆行しかできない</li>
+</ul>
+<p>例えば，上図の<span class="math inline">\(x_1\)</span>の平均<span class="math inline">\(\bar{x}_1\)</span>は以下の通りです。 <span class="math display">\[
+\bar{x}_1 = a_1 \times \mu + m_1
+\]</span></p>
+<p>観測変数の平均が，<span class="math inline">\(a_1 \times \mu\)</span>という潜在変数による成分（平均）と<span class="math inline">\(x_1\)</span>独自の成分（切片）で表され，構造化されていることがわかります。</p>
+</section>
+<section id="測定の不変性" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="測定の不変性"><span class="header-section-number">7.2</span> 測定の不変性</h2>
+<p>母集団の比較では，集団間の同質性について段階的に考えます。</p>
+<ol type="1">
+<li>配置不変</li>
+<li>弱い測定不変</li>
+<li>強い測定不変</li>
+<li>厳格な測定不変</li>
+</ol>
+<p><strong>配置不変</strong>は最も基本となるレベルです。 異なる集団で少なくとも同じモデル（変数間の構造）が 成り立っている状況です。 パス係数などが等しいかどうかは問いません。</p>
+<p><strong>測定不変</strong>は集団間の観測変数の母数に関して， どこまで等しいといえるかでレベルが異なります。</p>
+<p><strong>弱い測定不変</strong>は，潜在変数の分散は異なるが， 潜在変数からの負荷量が集団間で等しいといえる状況です。 潜在変数の分散と共分散の比較を可能とします。</p>
+<p><strong>強い測定不変</strong>は，観測変数の切片も等しい，とするものです。 観測変数で揃えることで，潜在変数の平均，分散，共分散が 異なるかどうかを検討可能になります。 この段階で，潜在変数間に違いがみられるのであれば， それは観測変数による測定の違いではなく，潜在変数の分布に 本質的な違いがあるといえます。</p>
+<p><strong>厳格な測定不変</strong>は，観測変数の誤差分散が集団間で等しい， というものです。潜在変数をモデル比較する上では， 通常要求されない水準の不変性です。</p>
+</section>
+<section id="部分的な不変性" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="部分的な不変性"><span class="header-section-number">7.3</span> 部分的な不変性</h2>
+<p>すべての観測変数については不変性を示せない場合， 適合度の観点から，いずれの観測変数に不変性が想定できないか 特定（それ以外は成り立っていることを確認）します。 その上で，以下のような可能性を検討します。</p>
+<ol type="1">
+<li>潜在変数の比較の土台は十分であることを示しつつ，当該観測変数の等値制約は外す。</li>
+<li>違いはわずかであることを確認し，等値制約はそのままにする</li>
+<li>当該観測変数を分析から除外し，再推定する。</li>
+<li>集団間で異なる構成概念を測定しているものとして結論づける。</li>
+</ol>
+<p>実践的には，1や2の観点から部分的な不変性のもとで検討を進めます。</p>
+</section>
+<section id="構造方程式モデリングにおける適合度" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="構造方程式モデリングにおける適合度"><span class="header-section-number">7.4</span> 構造方程式モデリングにおける適合度</h2>
+<section id="適合度指標" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="適合度指標"><span class="header-section-number">7.4.1</span> 適合度指標</h3>
+<ul>
+<li>提案された理論モデルが実際に収集されたデータとどの程度整合しているかを評価する統計量</li>
+<li>モデルの「適合」を定量的に測定</li>
+</ul>
+</section>
+<section id="なぜ重要か" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="なぜ重要か"><span class="header-section-number">7.4.2</span> なぜ重要か</h3>
+<ul>
+<li>モデルがデータと統計的に整合しているかを判断</li>
+<li>競合する複数の理論モデルの中から最適なモデルを選択</li>
+<li>SEMは<strong>確認的手法</strong>であり，事前に指定されたモデルの妥当性評価に不可欠</li>
+</ul>
+</section>
+<section id="適合度指標の分類" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="適合度指標の分類"><span class="header-section-number">7.4.3</span> 適合度指標の分類</h3>
+<ol type="1">
+<li><strong>絶対的適合度指標</strong> (Absolute Fit Indices)
+<ul>
+<li>モデル全体の適合度を直接的に評価</li>
+</ul></li>
+<li><strong>増分的適合度指標</strong> (Incremental Fit Indices)
+<ul>
+<li>基準モデル（ヌルモデル）との比較による評価</li>
+</ul></li>
+<li><strong>倹約的適合度指標</strong> (Parsimony Fit Indices)
+<ul>
+<li>モデルの複雑さを考慮した適合度評価</li>
+</ul></li>
+</ol>
+<p>各指標は異なる観点からモデルの適合度を評価するため，複数の指標を組み合わせて使用することが重要</p>
+</section>
+<section id="絶対的適合度指標-absolute-fit-indices" class="level3" data-number="7.4.4">
+<h3 data-number="7.4.4" class="anchored" data-anchor-id="絶対的適合度指標-absolute-fit-indices"><span class="header-section-number">7.4.4</span> 絶対的適合度指標 (Absolute Fit Indices)</h3>
+<section id="特徴" class="level4" data-number="7.4.4.1">
+<h4 data-number="7.4.4.1" class="anchored" data-anchor-id="特徴"><span class="header-section-number">7.4.4.1</span> 特徴</h4>
+<ul>
+<li><strong>モデル全体</strong>の適合度を評価</li>
+<li>観測データ（共分散行列）の再現度を<strong>直接的に測定</strong></li>
+<li>ヌルモデルとの比較やパラメータ数調整は行わない</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="主要指標" class="level3" data-number="7.4.5">
+<h3 data-number="7.4.5" class="anchored" data-anchor-id="主要指標"><span class="header-section-number">7.4.5</span> 主要指標</h3>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: tidyverse</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+Loading required package: kableExtra
+
+
+Attaching package: 'kableExtra'
+
+
+The following object is masked from 'package:dplyr':
+
+    group_rows</code></pre>
+</div>
+<div class="cell-output-display">
+<table class="table table-striped table-hover caption-top table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">指標</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">適合基準</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">特徴</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">χ² (カイ二乗値)</td>
+<td style="text-align: left;">p &gt; 0.05</td>
+<td style="text-align: left;">サンプルサイズに敏感</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">χ²/df (相対カイ二乗)</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">サンプルサイズ依存性を軽減</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GFI</td>
+<td style="text-align: left;">≥ 0.90</td>
+<td style="text-align: left;">観測共分散の説明割合</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AGFI</td>
+<td style="text-align: left;">≥ 0.80</td>
+<td style="text-align: left;">自由度で調整済み</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RMSEA</td>
+<td style="text-align: left;">≤ 0.05 (良好), ≤ 0.08 (許容)</td>
+<td style="text-align: left;">サンプルサイズの影響小</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SRMR</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">平均的な残差</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="絶対適合度指標の詳細" class="level3" data-number="7.4.6">
+<h3 data-number="7.4.6" class="anchored" data-anchor-id="絶対適合度指標の詳細"><span class="header-section-number">7.4.6</span> 絶対適合度指標の詳細</h3>
+<section id="カイ二乗値-χ²" class="level4" data-number="7.4.6.1">
+<h4 data-number="7.4.6.1" class="anchored" data-anchor-id="カイ二乗値-χ²"><span class="header-section-number">7.4.6.1</span> カイ二乗値 (χ²)</h4>
+<ul>
+<li>最も一般的な適合度検定</li>
+<li><strong>「不適合度」の尺度</strong> - 有意でない（p &gt; 0.05）ことが良好</li>
+<li><strong>注意点</strong>: サンプルサイズが大きいと過度に厳格になる</li>
+<li><strong>推奨</strong>: サンプルサイズ &lt; 200の場合はχ²，≥ 200の場合はχ²/dfを重視 #### RMSEA (近似の二乗平均平方根誤差)</li>
+<li><strong>人気の高い指標</strong> - サンプルサイズの影響を比較的受けにくい</li>
+<li>0.05以下：良好な適合，0.08以下：許容範囲の適合</li>
+</ul>
+</section>
+<section id="gfiagfi-適合度指標" class="level4" data-number="7.4.6.2">
+<h4 data-number="7.4.6.2" class="anchored" data-anchor-id="gfiagfi-適合度指標"><span class="header-section-number">7.4.6.2</span> GFI/AGFI (適合度指標)</h4>
+<ul>
+<li>GFI: 観測された共分散の説明割合</li>
+<li>AGFI: モデルの自由度で調整済み</li>
+</ul>
+</section>
+</section>
+<section id="増分的適合度指標-incremental-fit-indices" class="level3" data-number="7.4.7">
+<h3 data-number="7.4.7" class="anchored" data-anchor-id="増分的適合度指標-incremental-fit-indices"><span class="header-section-number">7.4.7</span> 増分的適合度指標 (Incremental Fit Indices)</h3>
+<ul>
+<li><strong>基準モデル（ヌルモデル）との比較</strong>による評価</li>
+<li>ヌルモデル: すべての観測変数が無相関と仮定</li>
+<li>絶対的適合度指標を補完する役割</li>
+</ul>
+<hr>
+<section id="主要指標-1" class="level4" data-number="7.4.7.1">
+<h4 data-number="7.4.7.1" class="anchored" data-anchor-id="主要指標-1"><span class="header-section-number">7.4.7.1</span> 主要指標</h4>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped table-hover caption-top table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">指標</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">適合基準</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">特徴</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NFI (規範適合度指標)</td>
+<td style="text-align: left;">≥ 0.90</td>
+<td style="text-align: left;">サンプルサイズ</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NNFI/TLI</td>
+<td style="text-align: left;">≥ 0.80</td>
+<td style="text-align: left;">NFIの改良版</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CFI (比較適合度指標)</td>
+<td style="text-align: left;">≥ 0.90</td>
+<td style="text-align: left;">サンプルサイズの影響小</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IFI (増分適合度指標)</td>
+<td style="text-align: left;">≥ 0.90</td>
+<td style="text-align: left;">不適合の改善割合</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="cfi-比較適合度指標" class="level4" data-number="7.4.7.2">
+<h4 data-number="7.4.7.2" class="anchored" data-anchor-id="cfi-比較適合度指標"><span class="header-section-number">7.4.7.2</span> CFI (比較適合度指標)</h4>
+<ul>
+<li><strong>NFIの改良版</strong> - サンプルサイズの影響を比較的受けにくい</li>
+<li>ヌルモデルから研究モデルへの移行による不適合の改善割合を測定</li>
+<li>0から1の範囲，1に近いほど良好</li>
+</ul>
+</section>
+</section>
+<section id="倹約的適合度指標-parsimony-fit-indices" class="level3" data-number="7.4.8">
+<h3 data-number="7.4.8" class="anchored" data-anchor-id="倹約的適合度指標-parsimony-fit-indices"><span class="header-section-number">7.4.8</span> 倹約的適合度指標 (Parsimony Fit Indices)</h3>
+<ul>
+<li>モデルの適合度と<strong>複雑さ（パラメータ数）</strong>のバランスを評価</li>
+<li><strong>過剰適合 (overfitting)</strong> を防ぐためのペナルティ</li>
+<li>より簡潔で一般化可能なモデルの選択を促進</li>
+</ul>
+<hr>
+<section id="主要指標-2" class="level4" data-number="7.4.8.1">
+<h4 data-number="7.4.8.1" class="anchored" data-anchor-id="主要指標-2"><span class="header-section-number">7.4.8.1</span> 主要指標</h4>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped table-hover caption-top table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">指標</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">適合基準</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">目的</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PGFI (倹約適合度指標)</td>
+<td style="text-align: left;">≥ 0.90</td>
+<td style="text-align: left;">GFIの倹約性調整</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PNFI (倹約規範適合度指標)</td>
+<td style="text-align: left;">≥ 0.90</td>
+<td style="text-align: left;">NFIの倹約性調整</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">倹約性比率</td>
+<td style="text-align: left;">モデル依存</td>
+<td style="text-align: left;">過剰適合の評価</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="倹約性の重要性" class="level4" data-number="7.4.8.2">
+<h4 data-number="7.4.8.2" class="anchored" data-anchor-id="倹約性の重要性"><span class="header-section-number">7.4.8.2</span> 倹約性の重要性</h4>
+<ul>
+<li>複雑なモデル ≠ 良いモデル</li>
+<li>パラメータ数の増加は適合度を向上させるが，一般化可能性を低下</li>
+<li><strong>倹約性比率</strong>: 指定モデルの自由度 / 総自由度</li>
+</ul>
+</section>
+</section>
+<section id="適合度指標使用上の注意点" class="level3" data-number="7.4.9">
+<h3 data-number="7.4.9" class="anchored" data-anchor-id="適合度指標使用上の注意点"><span class="header-section-number">7.4.9</span> 適合度指標使用上の注意点</h3>
+<ul>
+<li><strong>単一指標に依存しない</strong> - 複数の異なるタイプ（3～4種類）を組み合わせ</li>
+<li><strong>万能なガイドラインは存在しない</strong> - モデル特性に応じた調整が必要</li>
+</ul>
+<hr>
+</section>
+<section id="重要な注意点" class="level3" data-number="7.4.10">
+<h3 data-number="7.4.10" class="anchored" data-anchor-id="重要な注意点"><span class="header-section-number">7.4.10</span> 重要な注意点</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped table-hover caption-top table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">注意点</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">説明</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">対策</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">良い適合 ≠ 強い関係</td>
+<td style="text-align: left;">変数間の相関が低くても良い適合は可能</td>
+<td style="text-align: left;">相関行列も確認</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">過剰適合のリスク</td>
+<td style="text-align: left;">特にサンプルサイズ</td>
+<td style="text-align: left;">複数指標で総合判断</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">誤指定の可能性</td>
+<td style="text-align: left;">高い修正指標は多重共線性を示唆</td>
+<td style="text-align: left;">理論的妥当性も検討</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">データ品質の影響</td>
+<td style="text-align: left;">非正規分布データは推定を不正確にする</td>
+<td style="text-align: left;">適切なサンプルサイズ確保</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="推奨される適合度評価の手順" class="level3" data-number="7.4.11">
+<h3 data-number="7.4.11" class="anchored" data-anchor-id="推奨される適合度評価の手順"><span class="header-section-number">7.4.11</span> 推奨される適合度評価の手順</h3>
+<p>ステップ1: 基本的な適合度確認 1. <strong>χ²検定</strong> (サンプルサイズ &lt; 200) または <strong>χ²/df</strong> (≥ 200) 2. <strong>RMSEA</strong> ≤ 0.08 (できれば ≤ 0.05) 3. <strong>CFI</strong> ≥ 0.90</p>
+<p>ステップ2: 補完的指標の確認 4. <strong>SRMR</strong> &lt; 0.05 5. <strong>GFI/AGFI</strong> (参考程度) 6. <strong>倹約適合度指標</strong> (モデル比較時)</p>
+<p>ステップ3: 総合判断 - <strong>理論的妥当性</strong>の検討 - <strong>修正指標</strong>の確認 - <strong>パラメータ推定値</strong>の妥当性 - <strong>残差分析</strong></p>
+<p><strong>重要</strong>: 統計的適合度だけでなく，理論的・実質的意味も考慮する</p>
+</section>
+</section>
+<section id="不変性の検討" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="不変性の検討"><span class="header-section-number">7.5</span> 不変性の検討</h2>
+<p><span class="math inline">\(\chi^2\)</span>統計量の変化について検定を行うものがありますが， サンプルサイズの影響などから，実施されても結果を重視しない傾向があります。</p>
+<p>自らの仮説をベースに，それぞれのモデルの適合度指標を検討し， 「より良い」というよりは，実質科学的に「認めうる」不変性を示しつつ， 潜在変数の集団間の比較検討を行うこととなります。</p>
+<p>適合度指標には，CFIやRMSEA，AIC/BICなどを利用します。</p>
+</section>
+<section id="rでの検討" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="rでの検討"><span class="header-section-number">7.6</span> <strong>R</strong>での検討</h2>
+<p>5歳～16歳の子どもを対象にした知能検査であるWISC-III の結果を 躁症状があるかないかで比較する研究を例に多母集団の同時解析を 具体的にみていきましょう。</p>
+<p>WISC-IIIの言語性検査を構成する「知識<code>Verbal1</code>」 「類似<code>Verbal2</code>」「単語<code>Verbal3</code>」 「理解<code>Verbal4</code>」と 動作性検査を構成する「絵画完成<code>Perfor1</code>」 「絵画配列<code>Perfor2</code>」「積木模様<code>Perfor3</code>」 「組合せ<code>Perfor4</code>」を 合わせた８つの観測変数を対象とします。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">require</span>(lavaan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lavaan</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>This is lavaan 0.6-19
+lavaan is FREE software! Please report any bugs.</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># 変数の名前</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>vec_var <span class="ot">&lt;-</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">c</span>(<span class="st">"Verbal1"</span>, <span class="st">"Verbal2"</span>, <span class="st">"Verbal3"</span>, <span class="st">"Verbal4"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="st">"Perfor1"</span>, <span class="st">"Perfor2"</span>, <span class="st">"Perfor3"</span>, <span class="st">"Perfor4"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co"># --- 躁状態症状をもつ集団</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># 共分散</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>mat_cov_manic <span class="ot">&lt;-</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>  <span class="fu">c</span>(<span class="fl">9.364</span>,</span>
+<span id="cb6-10"><a href="#cb6-10"></a>    <span class="fl">7.777</span>, <span class="fl">12.461</span>,</span>
+<span id="cb6-11"><a href="#cb6-11"></a>    <span class="fl">6.422</span>, <span class="fl">8.756</span>, <span class="fl">10.112</span>,</span>
+<span id="cb6-12"><a href="#cb6-12"></a>    <span class="fl">5.669</span>, <span class="fl">7.445</span>, <span class="fl">6.797</span>, <span class="fl">8.123</span>,</span>
+<span id="cb6-13"><a href="#cb6-13"></a>    <span class="fl">3.048</span>, <span class="fl">4.922</span>, <span class="fl">4.513</span>, <span class="fl">4.116</span>, <span class="fl">6.200</span>,</span>
+<span id="cb6-14"><a href="#cb6-14"></a>    <span class="fl">3.505</span>, <span class="fl">4.880</span>, <span class="fl">4.899</span>, <span class="fl">5.178</span>, <span class="fl">5.114</span>, <span class="fl">15.603</span>,</span>
+<span id="cb6-15"><a href="#cb6-15"></a>    <span class="fl">3.690</span>, <span class="fl">5.440</span>, <span class="fl">5.220</span>, <span class="fl">3.151</span>, <span class="fl">3.587</span>,  <span class="fl">6.219</span>, <span class="fl">11.223</span>,</span>
+<span id="cb6-16"><a href="#cb6-16"></a>    <span class="fl">3.640</span>, <span class="fl">4.641</span>, <span class="fl">4.877</span>, <span class="fl">3.568</span>, <span class="fl">3.819</span>,  <span class="fl">5.811</span>,  <span class="fl">6.501</span>, <span class="fl">9.797</span>)</span>
+<span id="cb6-17"><a href="#cb6-17"></a>mat_cov_manic <span class="ot">&lt;-</span> <span class="fu">getCov</span>(mat_cov_manic, <span class="at">names =</span> vec_var)</span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co"># 平均</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a>vec_mean_manic <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.09</span>, <span class="fl">12.07</span>, <span class="fl">10.25</span>, <span class="fl">9.96</span>, <span class="fl">10.90</span>, <span class="fl">11.24</span>, <span class="fl">10.30</span>, <span class="fl">10.44</span>)</span>
+<span id="cb6-20"><a href="#cb6-20"></a></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co"># --- 比較集団</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co"># 共分散</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a>mat_cov_base <span class="ot">&lt;-</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a>  <span class="fu">c</span>(<span class="fl">9.610</span>,</span>
+<span id="cb6-25"><a href="#cb6-25"></a>    <span class="fl">5.844</span>, <span class="fl">8.410</span>,</span>
+<span id="cb6-26"><a href="#cb6-26"></a>    <span class="fl">6.324</span>, <span class="fl">6.264</span>, <span class="fl">9.000</span>,</span>
+<span id="cb6-27"><a href="#cb6-27"></a>    <span class="fl">4.405</span>, <span class="fl">4.457</span>, <span class="fl">5.046</span>, <span class="fl">8.410</span>,</span>
+<span id="cb6-28"><a href="#cb6-28"></a>    <span class="fl">4.464</span>, <span class="fl">4.547</span>, <span class="fl">4.512</span>, <span class="fl">3.712</span>, <span class="fl">10.240</span>,</span>
+<span id="cb6-29"><a href="#cb6-29"></a>    <span class="fl">3.478</span>, <span class="fl">2.967</span>, <span class="fl">2.970</span>, <span class="fl">2.871</span>,  <span class="fl">3.802</span>, <span class="fl">10.890</span>,</span>
+<span id="cb6-30"><a href="#cb6-30"></a>    <span class="fl">5.270</span>, <span class="fl">4.930</span>, <span class="fl">4.080</span>, <span class="fl">3.254</span>,  <span class="fl">5.222</span>,  <span class="fl">3.590</span>, <span class="fl">11.560</span>,</span>
+<span id="cb6-31"><a href="#cb6-31"></a>    <span class="fl">4.297</span>, <span class="fl">4.594</span>, <span class="fl">4.356</span>, <span class="fl">3.158</span>,  <span class="fl">4.963</span>,  <span class="fl">3.594</span>,  <span class="fl">6.620</span>, <span class="fl">10.890</span>)</span>
+<span id="cb6-32"><a href="#cb6-32"></a>mat_cov_base <span class="ot">&lt;-</span> <span class="fu">getCov</span>(mat_cov_base, <span class="at">names =</span> vec_var)</span>
+<span id="cb6-33"><a href="#cb6-33"></a><span class="co"># 平均</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a>vec_mean_base <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.10</span>, <span class="fl">10.30</span>, <span class="fl">9.80</span>, <span class="fl">10.10</span>, <span class="fl">10.10</span>, <span class="fl">10.10</span>, <span class="fl">9.90</span>, <span class="fl">10.20</span>)</span>
+<span id="cb6-35"><a href="#cb6-35"></a><span class="co"># 比較する2グループをリストにまとめる</span></span>
+<span id="cb6-36"><a href="#cb6-36"></a>lst_cov <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">manic =</span> mat_cov_manic, <span class="at">base =</span> mat_cov_base)</span>
+<span id="cb6-37"><a href="#cb6-37"></a>lst_n <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">manic =</span> <span class="dv">81</span>, <span class="at">base =</span> <span class="dv">200</span>)</span>
+<span id="cb6-38"><a href="#cb6-38"></a>lst_mean <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">manic =</span> vec_mean_manic, <span class="at">base =</span> vec_mean_base)</span>
+<span id="cb6-39"><a href="#cb6-39"></a><span class="co"># モデル式の記述</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a>mdl_wisc3 <span class="ot">&lt;-</span><span class="st">'</span></span>
+<span id="cb6-41"><a href="#cb6-41"></a><span class="st">  VC =~ Verbal1 + Verbal2 + Verbal3 + Verbal4 </span></span>
+<span id="cb6-42"><a href="#cb6-42"></a><span class="st">  VS =~ Perfor1 + Perfor2 + Perfor3 + Perfor4 </span></span>
+<span id="cb6-43"><a href="#cb6-43"></a><span class="st">  VC ~~ VS</span></span>
+<span id="cb6-44"><a href="#cb6-44"></a><span class="st">'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>配置不変が成り立つかどうか，つまり想定したモデルがそれぞれの集団で成立するか 分析します。なお，共分散行列ではなく，データを与えて分析する場合は， 集団を識別する変数（例えば<code>gender</code>）を以下のように指定します。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">cfa</span>(<span class="at">model=</span>mdl, <span class="at">data=</span>dat, <span class="at">group =</span> <span class="st">"gender"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>実行は以下のようになります。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>vec_fit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"chisq"</span>, <span class="st">"df"</span>, <span class="st">"rmsea"</span>, <span class="st">"cfi"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>rslt_base <span class="ot">&lt;-</span> <span class="fu">cfa</span>(mdl_wisc3,</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="at">sample.cov =</span> lst_cov, <span class="at">sample.nobs =</span> lst_n, <span class="at">sample.mean =</span> lst_mean,</span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="at">meanstructure =</span> <span class="cn">TRUE</span>, <span class="at">std.lv =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="fu">fitMeasures</span>(rslt_base, vec_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> chisq     df  rmsea    cfi 
+53.380 38.000  0.054  0.985 </code></pre>
+</div>
+</div>
+<p>配置不変は成り立っていると考えて良さそうです。</p>
+<p>因子の分布についての検討のためには， そもそも異なる集団の間で同じ因子を測定しているかを 確認する必要があります。 同じ因子とは，因子負荷量（loadings）が集団間で同じ，ということです。 弱い測定不変が成り立っているかは， 引数<code>group.equal</code>に等値の制約を置く 部分である<code>“loadings”</code>を指定します。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>rslt_weak <span class="ot">&lt;-</span> <span class="fu">cfa</span>(mdl_wisc3,</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="at">sample.cov =</span> lst_cov, <span class="at">sample.nobs =</span> lst_n, <span class="at">sample.mean =</span> lst_mean,</span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="at">meanstructure =</span> <span class="cn">TRUE</span>, <span class="at">group.equal =</span> <span class="st">"loadings"</span>, <span class="at">std.lv =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="fu">summary</span>(rslt_weak, <span class="at">fit.measures =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>lavaan 0.6-19 ended normally after 50 iterations
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                        52
+  Number of equality constraints                     8
+
+  Number of observations per group:                   
+    manic                                           81
+    base                                           200
+
+Model Test User Model:
+                                                      
+  Test statistic                                65.992
+  Degrees of freedom                                44
+  P-value (Chi-square)                           0.018
+  Test statistic for each group:
+    manic                                       37.832
+    base                                        28.160
+
+Model Test Baseline Model:
+
+  Test statistic                              1080.847
+  Degrees of freedom                                56
+  P-value                                        0.000
+
+User Model versus Baseline Model:
+
+  Comparative Fit Index (CFI)                    0.979
+  Tucker-Lewis Index (TLI)                       0.973
+
+Loglikelihood and Information Criteria:
+
+  Loglikelihood user model (H0)              -5247.971
+  Loglikelihood unrestricted model (H1)      -5214.975
+                                                      
+  Akaike (AIC)                               10583.942
+  Bayesian (BIC)                             10744.029
+  Sample-size adjusted Bayesian (SABIC)      10604.507
+
+Root Mean Square Error of Approximation:
+
+  RMSEA                                          0.060
+  90 Percent confidence interval - lower         0.026
+  90 Percent confidence interval - upper         0.088
+  P-value H_0: RMSEA &lt;= 0.050                    0.281
+  P-value H_0: RMSEA &gt;= 0.080                    0.127
+
+Standardized Root Mean Square Residual:
+
+  SRMR                                           0.055
+
+Parameter Estimates:
+
+  Standard errors                             Standard
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+
+Group 1 [manic]:
+
+Latent Variables:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)
+  VC =~                                               
+    Verbal1 (.p1.)    2.631    0.259   10.162    0.000
+    Verbal2 (.p2.)    2.908    0.270   10.759    0.000
+    Verbal3 (.p3.)    2.877    0.263   10.933    0.000
+    Verbal4 (.p4.)    2.273    0.227   10.005    0.000
+  VS =~                                               
+    Perfor1 (.p5.)    1.958    0.224    8.742    0.000
+    Perfor2 (.p6.)    1.739    0.255    6.816    0.000
+    Perfor3 (.p7.)    2.383    0.277    8.616    0.000
+    Perfor4 (.p8.)    2.298    0.263    8.748    0.000
+
+Covariances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)
+  VC ~~                                               
+    VS                0.750    0.070   10.705    0.000
+
+Intercepts:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)
+   .Verbal1          10.090    0.363   27.815    0.000
+   .Verbal2          12.070    0.373   32.397    0.000
+   .Verbal3          10.250    0.358   28.639    0.000
+   .Verbal4           9.960    0.306   32.548    0.000
+   .Perfor1          10.900    0.287   37.996    0.000
+   .Perfor2          11.240    0.403   27.915    0.000
+   .Perfor3          10.300    0.373   27.646    0.000
+   .Perfor4          10.440    0.346   30.170    0.000
+
+Variances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)
+   .Verbal1           3.739    0.694    5.386    0.000
+   .Verbal2           2.787    0.589    4.733    0.000
+   .Verbal3           2.097    0.494    4.242    0.000
+   .Verbal4           2.419    0.464    5.217    0.000
+   .Perfor1           2.831    0.599    4.725    0.000
+   .Perfor2          10.109    1.678    6.024    0.000
+   .Perfor3           5.564    1.079    5.158    0.000
+   .Perfor4           4.417    0.895    4.936    0.000
+    VC                1.000                           
+    VS                1.000                           
+
+
+Group 2 [base]:
+
+Latent Variables:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)
+  VC =~                                               
+    Verbal1 (.p1.)    2.631    0.259   10.162    0.000
+    Verbal2 (.p2.)    2.908    0.270   10.759    0.000
+    Verbal3 (.p3.)    2.877    0.263   10.933    0.000
+    Verbal4 (.p4.)    2.273    0.227   10.005    0.000
+  VS =~                                               
+    Perfor1 (.p5.)    1.958    0.224    8.742    0.000
+    Perfor2 (.p6.)    1.739    0.255    6.816    0.000
+    Perfor3 (.p7.)    2.383    0.277    8.616    0.000
+    Perfor4 (.p8.)    2.298    0.263    8.748    0.000
+
+Covariances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)
+  VC ~~                                               
+    VS                0.700    0.143    4.895    0.000
+
+Intercepts:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)
+   .Verbal1          10.100    0.212   47.646    0.000
+   .Verbal2          10.300    0.209   49.298    0.000
+   .Verbal3           9.800    0.209   46.810    0.000
+   .Verbal4          10.100    0.209   48.367    0.000
+   .Perfor1          10.100    0.221   45.728    0.000
+   .Perfor2          10.100    0.241   41.952    0.000
+   .Perfor3           9.900    0.239   41.391    0.000
+   .Perfor4          10.200    0.233   43.843    0.000
+
+Variances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)
+   .Verbal1           3.762    0.452    8.329    0.000
+   .Verbal2           2.346    0.352    6.660    0.000
+   .Verbal3           2.516    0.362    6.953    0.000
+   .Verbal4           4.821    0.532    9.056    0.000
+   .Perfor1           5.568    0.662    8.415    0.000
+   .Perfor2           8.290    0.905    9.155    0.000
+   .Perfor3           5.238    0.705    7.432    0.000
+   .Perfor4           5.055    0.671    7.535    0.000
+    VC                0.755    0.156    4.845    0.000
+    VS                1.092    0.261    4.181    0.000</code></pre>
+</div>
+</div>
+<p>出力には<code>Group 1 [manic]:</code>と <code>Group 2 [base]:</code>という表示がみられ， 因子負荷量には<code>(.p2.)</code>のように同じラベルが 付与されていることがわかります。</p>
+<p>CFIやRMSEAなどから，因子負荷量に等値の制約を置いても 適合はよいものと考えられます。</p>
+<p>同じ因子を測定していると考えられるため，今度は 切片が等しいかを確認します（強い測定不変）。 これにより， 因子平均の差を検討することが可能になります （平均に違いがあれば，それは観測変数レベルではなく因子レベルでの違い）。</p>
+<p>強い測定不変の制約は，弱い制約に<code>“intercepts”</code>を加えます。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>rslt_strong <span class="ot">&lt;-</span> <span class="fu">cfa</span>(mdl_wisc3,</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="at">sample.cov =</span> lst_cov, <span class="at">sample.nobs =</span> lst_n, <span class="at">sample.mean =</span> lst_mean,</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="at">meanstructure =</span> <span class="cn">TRUE</span>, <span class="at">std.lv =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">"loadings"</span>, <span class="st">"intercepts"</span>))</span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="fu">fitMeasures</span>(rslt_strong, vec_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  chisq      df   rmsea     cfi 
+109.088  50.000   0.092   0.942 </code></pre>
+</div>
+</div>
+<p>RMSEAの値が悪く，積極的には強い測定不変の成立を主張できない可能性があります。そこでここでは，弱い測定不変性より部分的に強い測定不変性の可能性を検討しましょう。</p>
+<p>等値制約に対しては関数<code>modindices()</code> が使えず，代わりに<code>lavTestScore()</code> を使うように促されます。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">lavTestScore</span>(rslt_strong)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$test
+
+total score test:
+
+   test     X2 df p.value
+1 score 50.655 16       0
+
+$uni
+
+univariate score tests:
+
+     lhs op   rhs     X2 df p.value
+1   .p1. == .p30.  2.678  1   0.102
+2   .p2. == .p31.  0.634  1   0.426
+3   .p3. == .p32.  0.138  1   0.710
+4   .p4. == .p33.  1.649  1   0.199
+5   .p5. == .p34.  2.275  1   0.131
+6   .p6. == .p35.  5.483  1   0.019
+7   .p7. == .p36.  0.017  1   0.898
+8   .p8. == .p37.  0.012  1   0.913
+9  .p20. == .p49.  5.165  1   0.023
+10 .p21. == .p50. 29.459  1   0.000
+11 .p22. == .p51.  0.850  1   0.357
+12 .p23. == .p52.  7.455  1   0.006
+13 .p24. == .p53.  1.745  1   0.186
+14 .p25. == .p54.  2.955  1   0.086
+15 .p26. == .p55.  0.772  1   0.380
+16 .p27. == .p56.  2.376  1   0.123</code></pre>
+</div>
+</div>
+<p>この検定では，等値の制約を外したときに尤度の改善がみられるかを確認します。<span class="math inline">\(\chi^2\)</span>値が最も大きい<code>.p21.</code>は，出力から確認すると<code>Verval2</code> の切片です。そこで，この切片のみ集団間での等値の制約を引数<code>group.partial</code>で外します。 切片の表現は<code>~1</code>です。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>rslt_p_strong <span class="ot">&lt;-</span> <span class="fu">cfa</span>(mdl_wisc3,</span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="at">sample.cov =</span> lst_cov, <span class="at">sample.nobs =</span> lst_n, <span class="at">sample.mean =</span> lst_mean,</span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="at">meanstructure =</span> <span class="cn">TRUE</span>, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">"loadings"</span>, <span class="st">"intercepts"</span>),</span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">"Verval2 ~1"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>弱い測定不変と強い測定不変の間にあるはずの部分的な 強い測定不変の適合をパッケージ<code>semTools</code>の関数<code>compareFit</code>で比較します。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">require</span>(semTools)</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">summary</span>(<span class="fu">compareFit</span>(rslt_weak, rslt_p_strong, rslt_strong))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>ここまでで強い測定不変性を確認できた，と考えます。 あとは，厳密な測定不変が成り立つか，さらに<strong>因子の分散共分散の等質性</strong>の成立，<strong>因子平均の等質性</strong>の確認ができるかの検討に進みます。最後のモデルが許容されたら，集団間に違いはないと考えることができます。</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># 厳格な測定不変</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>rslt_strict <span class="ot">&lt;-</span> <span class="fu">cfa</span>(mdl_wisc3,</span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="at">sample.cov =</span> lst_cov, <span class="at">sample.nobs =</span> lst_n, <span class="at">sample.mean =</span> lst_mean, <span class="at">meanstructure =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="at">std.lv =</span> <span class="cn">TRUE</span>, <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">"loadings"</span>, <span class="st">"intercepts"</span>, <span class="st">"residuals"</span>),</span>
+<span id="cb18-5"><a href="#cb18-5"></a>  <span class="at">group.partial =</span> <span class="st">"Verbal2 ~1"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="co"># 共通因子の分散共分散</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>rslt_cov_lv <span class="ot">&lt;-</span> <span class="fu">cfa</span>(mdl_wisc3,</span>
+<span id="cb18-8"><a href="#cb18-8"></a>  <span class="at">sample.cov =</span> lst_cov, <span class="at">sample.nobs =</span> lst_n, <span class="at">sample.mean =</span> lst_mean, <span class="at">meanstructure =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb18-9"><a href="#cb18-9"></a>  <span class="at">std.lv =</span> <span class="cn">TRUE</span>, <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">"loadings"</span>, <span class="st">"intercepts"</span>, <span class="st">"residuals"</span>, <span class="st">"lv.variances"</span>, <span class="st">"lv.covariances"</span>))</span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="co"># 因子得点の平均</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a>rslt_mean_lv <span class="ot">&lt;-</span> <span class="fu">cfa</span>(mdl_wisc3,</span>
+<span id="cb18-12"><a href="#cb18-12"></a>  <span class="at">sample.cov =</span> lst_cov, <span class="at">sample.nobs =</span> lst_n, <span class="at">sample.mean =</span> lst_mean, <span class="at">meanstructure =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb18-13"><a href="#cb18-13"></a>  <span class="at">std.lv =</span> <span class="cn">TRUE</span>, <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">"loadings"</span>, <span class="st">"intercepts"</span>, <span class="st">"residuals"</span>, <span class="st">"lv.variances"</span>, <span class="st">"lv.covariances"</span>, <span class="st">"means"</span>))</span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="co"># 因子得点の平均</span></span>
+<span id="cb18-15"><a href="#cb18-15"></a>rslt_mean_lv <span class="ot">&lt;-</span> <span class="fu">cfa</span>(mdl_wisc3,</span>
+<span id="cb18-16"><a href="#cb18-16"></a>  <span class="at">sample.cov =</span> lst_cov, <span class="at">sample.nobs =</span> lst_n, <span class="at">sample.mean =</span> lst_mean, <span class="at">meanstructure =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb18-17"><a href="#cb18-17"></a>  <span class="at">std.lv =</span> <span class="cn">TRUE</span>, <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">"loadings"</span>, <span class="st">"intercepts"</span>, <span class="st">"residuals"</span>, <span class="st">"lv.variances"</span>, <span class="st">"lv.covariances"</span>, <span class="st">"means"</span>))</span>
+<span id="cb18-18"><a href="#cb18-18"></a><span class="co"># モデルの比較</span></span>
+<span id="cb18-19"><a href="#cb18-19"></a><span class="fu">summary</span>(semTools<span class="sc">::</span><span class="fu">compareFit</span>(rslt_base, rslt_weak, rslt_p_strong, rslt_strong, rslt_strict, rslt_cov_lv, rslt_mean_lv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: lavaan-&gt;unknown():  
+   Some restricted models fit better than less restricted models; either 
+   these models are not nested, or the less restricted model failed to reach 
+   a global optimum.Smallest difference = -14.2067758077138.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: lavaan-&gt;unknown():  
+   some models have the same degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>################### Nested Model Comparison #########################
+
+Chi-Squared Difference Test
+
+              Df   AIC   BIC   Chisq Chisq diff    RMSEA Df diff Pr(&gt;Chisq)    
+rslt_base     38 10583 10765  53.380                                           
+rslt_weak     44 10584 10744  65.992     12.613 0.088568       6    0.04961 *  
+rslt_p_strong 50 10615 10753 109.088     43.096 0.209773       6  1.117e-07 ***
+rslt_strong   50 10615 10753 109.088      0.000 0.000000       0               
+rslt_strict   57 10587 10700  94.881    -14.207 0.000000       7    1.00000    
+rslt_cov_lv   61 10617 10715 132.783     37.902 0.245607       4  1.174e-07 ***
+rslt_mean_lv  63 10617 10708 136.654      3.871 0.081588       2    0.14439    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+####################### Model Fit Indices ###########################
+                 chisq df pvalue rmsea   cfi   tli  srmr        aic        bic
+rslt_base      53.380† 38   .050 .054† .985† .978† .034† 10583.329† 10765.247 
+rslt_weak      65.992  44   .018 .060  .979  .973  .055  10583.942  10744.029 
+rslt_p_strong 109.088  50   .000 .092  .942  .935  .064  10615.038  10753.295 
+rslt_strong   109.088  50   .000 .092  .942  .935  .064  10615.038  10753.295 
+rslt_strict    94.881  57   .001 .069  .963  .964  .070  10586.831  10699.620†
+rslt_cov_lv   132.783  61   .000 .092  .930  .936  .085  10616.732  10714.968 
+rslt_mean_lv  136.653  63   .000 .091  .928  .936  .092  10616.603  10707.562 
+
+################## Differences in Fit Indices #######################
+                            df  rmsea    cfi    tli  srmr     aic     bic
+rslt_weak - rslt_base        6  0.006 -0.006 -0.005 0.021   0.613 -21.217
+rslt_p_strong - rslt_weak    6  0.032 -0.036 -0.037 0.009  31.096   9.266
+rslt_strong - rslt_p_strong  0  0.000  0.000  0.000 0.000   0.000   0.000
+rslt_strict - rslt_strong    7 -0.023  0.021  0.028 0.006 -28.207 -53.675
+rslt_cov_lv - rslt_strict    4  0.023 -0.033 -0.028 0.015  29.902  15.348
+rslt_mean_lv - rslt_cov_lv   2  0.000 -0.002  0.000 0.007  -0.129  -7.406</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./sem1.html" class="pagination-link" aria-label="潜在変数モデル">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">潜在変数モデル</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./summary.html" class="pagination-link" aria-label="Summary">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

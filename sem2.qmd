@@ -1,5 +1,5 @@
-## 多母集団同時解析
-### 複数グループの比較
+# 多母集団同時解析
+## 複数グループの比較
 
 ここでは集団間の違いを検討する**平均共分散構造分析**を扱います。
 潜在変数に平均を導入する際には，これまでと異なり
@@ -21,32 +21,39 @@ $$
 
 観測変数の平均が，$a_1 \times \mu$という潜在変数による成分（平均）と$x_1$独自の成分（切片）で表され，構造化されていることがわかります。
 
-### 測定の不変性
-母集団の比較では，集団間の同質性についていくつかのレベルで考えます。
+## 測定の不変性
+母集団の比較では，集団間の同質性について段階的に考えます。
 
 1. 配置不変
 1. 弱い測定不変
 1. 強い測定不変
 1. 厳格な測定不変
 
-**配置不変**は最も基本となるレベルです。異なる集団で少なくとも同じモデル（変数間の構造）が成り立っている状況です。
+**配置不変**は最も基本となるレベルです。
+異なる集団で少なくとも同じモデル（変数間の構造）が
+成り立っている状況です。
 パス係数などが等しいかどうかは問いません。
 
 **測定不変**は集団間の観測変数の母数に関して，
 どこまで等しいといえるかでレベルが異なります。
 
-**弱い測定不変**は，潜在変数の分散は異なるが，潜在変数からの負荷量が集団間で等しいといえる状況です。
+**弱い測定不変**は，潜在変数の分散は異なるが，
+潜在変数からの負荷量が集団間で等しいといえる状況です。
 潜在変数の分散と共分散の比較を可能とします。
 
-**強い測定不変**は，観測変数の切片も等しい，とするものです。観測変数で揃えることで，潜在変数の平均，分散，共分散が異なるかどうかを検討可能になります。
+**強い測定不変**は，観測変数の切片も等しい，とするものです。
+観測変数で揃えることで，潜在変数の平均，分散，共分散が
+異なるかどうかを検討可能になります。
 この段階で，潜在変数間に違いがみられるのであれば，
 それは観測変数による測定の違いではなく，潜在変数の分布に
 本質的な違いがあるといえます。
 
-**厳格な測定不変**は，観測変数の誤差分散が集団間で等しい，というものです。潜在変数をモデル比較する上では，通常要求されない水準の不変性です。
+**厳格な測定不変**は，観測変数の誤差分散が集団間で等しい，
+というものです。潜在変数をモデル比較する上では，
+通常要求されない水準の不変性です。
 
 
-### 部分的な不変性
+## 部分的な不変性
 すべての観測変数については不変性を示せない場合，
 適合度の観点から，いずれの観測変数に不変性が想定できないか
 特定（それ以外は成り立っていることを確認）します。
@@ -59,17 +66,342 @@ $$
 
 実践的には，1や2の観点から部分的な不変性のもとで検討を進めます。
 
-### 不変性の検討
-$\chi^2$統計量の変化について検定を行うものがありますが，サンプルサイズの影響などから，実施されても結果を重視しない傾向があります。
+## 構造方程式モデリングにおける適合度
+
+### 適合度指標
+- 提案された理論モデルが実際に収集されたデータとどの程度整合しているかを評価する統計量
+- モデルの「適合」を定量的に測定
+
+### なぜ重要か
+- モデルがデータと統計的に整合しているかを判断
+- 競合する複数の理論モデルの中から最適なモデルを選択
+- SEMは**確認的手法**であり，事前に指定されたモデルの妥当性評価に不可欠
+
+### 適合度指標の分類
+
+1. **絶対的適合度指標** (Absolute Fit Indices)
+   - モデル全体の適合度を直接的に評価
+
+2. **増分的適合度指標** (Incremental Fit Indices)  
+   - 基準モデル（ヌルモデル）との比較による評価
+
+3. **倹約的適合度指標** (Parsimony Fit Indices)
+   - モデルの複雑さを考慮した適合度評価
+
+各指標は異なる観点からモデルの適合度を評価するため，複数の指標を組み合わせて使用することが重要
+
+### 絶対的適合度指標 (Absolute Fit Indices)
+
+#### 特徴
+- **モデル全体**の適合度を評価
+- 観測データ（共分散行列）の再現度を**直接的に測定**
+- ヌルモデルとの比較やパラメータ数調整は行わない
+
+---
+
+### 主要指標
+
+```{r absolute-fit-table, echo=FALSE}
+absolute_fit <- data.frame(
+  指標 = c("χ² (カイ二乗値)", "χ²/df (相対カイ二乗)", "GFI", "AGFI", "RMSEA", "SRMR"),
+  適合基準 = c("p > 0.05", "< 2.0 or 3.0", "≥ 0.90", "≥ 0.80", "≤ 0.05 (良好), ≤ 0.08 (許容)", "< 0.05"),
+  特徴 = c("サンプルサイズに敏感", "サンプルサイズ依存性を軽減", "観測共分散の説明割合", "自由度で調整済み", "サンプルサイズの影響小", "平均的な残差")
+)
+require(tidyverse)
+require(kableExtra)
+kable(absolute_fit, format = "html", escape = FALSE) %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+### 絶対適合度指標の詳細
+
+#### カイ二乗値 (χ²)
+- 最も一般的な適合度検定
+- **「不適合度」の尺度** - 有意でない（p > 0.05）ことが良好
+- **注意点**: サンプルサイズが大きいと過度に厳格になる
+- **推奨**: サンプルサイズ < 200の場合はχ²，≥ 200の場合はχ²/dfを重視
+#### RMSEA (近似の二乗平均平方根誤差)
+- **人気の高い指標** - サンプルサイズの影響を比較的受けにくい
+- 0.05以下：良好な適合，0.08以下：許容範囲の適合
+
+#### GFI/AGFI (適合度指標)
+- GFI: 観測された共分散の説明割合
+- AGFI: モデルの自由度で調整済み
+
+### 増分的適合度指標 (Incremental Fit Indices)
+
+- **基準モデル（ヌルモデル）との比較**による評価
+- ヌルモデル: すべての観測変数が無相関と仮定
+- 絶対的適合度指標を補完する役割
+
+---
+
+#### 主要指標
+
+```{r incremental-fit-table, echo=FALSE}
+incremental_fit <- data.frame(
+  指標 = c("NFI (規範適合度指標)", "NNFI/TLI", "CFI (比較適合度指標)", "IFI (増分適合度指標)"),
+  適合基準 = c("≥ 0.90", "≥ 0.80", "≥ 0.90", "≥ 0.90"),
+  特徴 = c("サンプルサイズ < 200で敏感", "NFIの改良版", "サンプルサイズの影響小", "不適合の改善割合")
+)
+
+kable(incremental_fit, format = "html", escape = FALSE) %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+#### CFI (比較適合度指標)
+- **NFIの改良版** - サンプルサイズの影響を比較的受けにくい
+- ヌルモデルから研究モデルへの移行による不適合の改善割合を測定
+- 0から1の範囲，1に近いほど良好
+
+
+### 倹約的適合度指標 (Parsimony Fit Indices)
+
+- モデルの適合度と**複雑さ（パラメータ数）**のバランスを評価
+- **過剰適合 (overfitting)** を防ぐためのペナルティ
+- より簡潔で一般化可能なモデルの選択を促進
+
+---
+
+#### 主要指標
+
+```{r parsimony-fit-table, echo=FALSE}
+parsimony_fit <- data.frame(
+  指標 = c("PGFI (倹約適合度指標)", "PNFI (倹約規範適合度指標)", "倹約性比率"),
+  適合基準 = c("≥ 0.90", "≥ 0.90", "モデル依存"),
+  目的 = c("GFIの倹約性調整", "NFIの倹約性調整", "過剰適合の評価")
+)
+
+kable(parsimony_fit, format = "html", escape = FALSE) %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+#### 倹約性の重要性
+- 複雑なモデル ≠ 良いモデル
+- パラメータ数の増加は適合度を向上させるが，一般化可能性を低下
+- **倹約性比率**: 指定モデルの自由度 / 総自由度
+
+### 適合度指標使用上の注意点
+
+- **単一指標に依存しない** - 複数の異なるタイプ（3～4種類）を組み合わせ
+- **万能なガイドラインは存在しない** - モデル特性に応じた調整が必要
+
+---
+
+### 重要な注意点
+
+```{r warnings-table, echo=FALSE}
+warnings <- data.frame(
+  注意点 = c("良い適合 ≠ 強い関係", "過剰適合のリスク", "誤指定の可能性", "データ品質の影響"),
+  説明 = c("変数間の相関が低くても良い適合は可能", "特にサンプルサイズ < 200で顕著", "高い修正指標は多重共線性を示唆", "非正規分布データは推定を不正確にする"),
+  対策 = c("相関行列も確認", "複数指標で総合判断", "理論的妥当性も検討", "適切なサンプルサイズ確保")
+)
+
+kable(warnings, format = "html", escape = FALSE) %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+### 推奨される適合度評価の手順
+
+ステップ1: 基本的な適合度確認
+1. **χ²検定** (サンプルサイズ < 200) または **χ²/df** (≥ 200)
+2. **RMSEA** ≤ 0.08 (できれば ≤ 0.05)
+3. **CFI** ≥ 0.90
+
+ステップ2: 補完的指標の確認
+4. **SRMR** < 0.05
+5. **GFI/AGFI** (参考程度)
+6. **倹約適合度指標** (モデル比較時)
+
+ステップ3: 総合判断
+- **理論的妥当性**の検討
+- **修正指標**の確認
+- **パラメータ推定値**の妥当性
+- **残差分析**
+
+**重要**: 統計的適合度だけでなく，理論的・実質的意味も考慮する
+
+
+## 不変性の検討
+$\chi^2$統計量の変化について検定を行うものがありますが，
+サンプルサイズの影響などから，実施されても結果を重視しない傾向があります。
 
 自らの仮説をベースに，それぞれのモデルの適合度指標を検討し，
-「より良い」というよりは，実質科学的に「認めうる」不変性を示しつつ，潜在変数の集団間の比較検討を行うこととなります。
+「より良い」というよりは，実質科学的に「認めうる」不変性を示しつつ，
+潜在変数の集団間の比較検討を行うこととなります。
 
 適合度指標には，CFIやRMSEA，AIC/BICなどを利用します。
 
-### **R**での検討
+## **R**での検討
 5歳～16歳の子どもを対象にした知能検査であるWISC-III
 の結果を
-躁症状があるかないか
-です。
-6種類の言語性下位検査と7種類の動作性下位検査で構成されており、言語性IQと動作性IQおよび全検査IQを測定できます。
+躁症状があるかないかで比較する研究を例に多母集団の同時解析を
+具体的にみていきましょう。
+
+WISC-IIIの言語性検査を構成する「知識<code>Verbal1</code>」
+「類似<code>Verbal2</code>」「単語<code>Verbal3</code>」
+「理解<code>Verbal4</code>」と
+動作性検査を構成する「絵画完成<code>Perfor1</code>」
+「絵画配列<code>Perfor2</code>」「積木模様<code>Perfor3</code>」
+「組合せ<code>Perfor4</code>」を
+合わせた８つの観測変数を対象とします。
+
+```{r}
+require(lavaan)
+# 変数の名前
+vec_var <-
+  c("Verbal1", "Verbal2", "Verbal3", "Verbal4",
+    "Perfor1", "Perfor2", "Perfor3", "Perfor4")
+
+# --- 躁状態症状をもつ集団
+# 共分散
+mat_cov_manic <-
+  c(9.364,
+    7.777, 12.461,
+    6.422, 8.756, 10.112,
+    5.669, 7.445, 6.797, 8.123,
+    3.048, 4.922, 4.513, 4.116, 6.200,
+    3.505, 4.880, 4.899, 5.178, 5.114, 15.603,
+    3.690, 5.440, 5.220, 3.151, 3.587,  6.219, 11.223,
+    3.640, 4.641, 4.877, 3.568, 3.819,  5.811,  6.501, 9.797)
+mat_cov_manic <- getCov(mat_cov_manic, names = vec_var)
+# 平均
+vec_mean_manic <- c(10.09, 12.07, 10.25, 9.96, 10.90, 11.24, 10.30, 10.44)
+
+# --- 比較集団
+# 共分散
+mat_cov_base <-
+  c(9.610,
+    5.844, 8.410,
+    6.324, 6.264, 9.000,
+    4.405, 4.457, 5.046, 8.410,
+    4.464, 4.547, 4.512, 3.712, 10.240,
+    3.478, 2.967, 2.970, 2.871,  3.802, 10.890,
+    5.270, 4.930, 4.080, 3.254,  5.222,  3.590, 11.560,
+    4.297, 4.594, 4.356, 3.158,  4.963,  3.594,  6.620, 10.890)
+mat_cov_base <- getCov(mat_cov_base, names = vec_var)
+# 平均
+vec_mean_base <- c(10.10, 10.30, 9.80, 10.10, 10.10, 10.10, 9.90, 10.20)
+# 比較する2グループをリストにまとめる
+lst_cov <- list(manic = mat_cov_manic, base = mat_cov_base)
+lst_n <- list(manic = 81, base = 200)
+lst_mean <- list(manic = vec_mean_manic, base = vec_mean_base)
+# モデル式の記述
+mdl_wisc3 <-'
+  VC =~ Verbal1 + Verbal2 + Verbal3 + Verbal4 
+  VS =~ Perfor1 + Perfor2 + Perfor3 + Perfor4 
+  VC ~~ VS
+'
+```
+
+配置不変が成り立つかどうか，つまり想定したモデルがそれぞれの集団で成立するか
+分析します。なお，共分散行列ではなく，データを与えて分析する場合は，
+集団を識別する変数（例えば<code>gender</code>）を以下のように指定します。
+```{r, eval=FALSE}
+cfa(model=mdl, data=dat, group = "gender")
+```
+
+実行は以下のようになります。
+
+```{r}
+vec_fit <- c("chisq", "df", "rmsea", "cfi")
+rslt_base <- cfa(mdl_wisc3,
+  sample.cov = lst_cov, sample.nobs = lst_n, sample.mean = lst_mean,
+  meanstructure = TRUE, std.lv = TRUE) 
+fitMeasures(rslt_base, vec_fit)
+```
+
+配置不変は成り立っていると考えて良さそうです。
+
+因子の分布についての検討のためには，
+そもそも異なる集団の間で同じ因子を測定しているかを
+確認する必要があります。
+同じ因子とは，因子負荷量（loadings）が集団間で同じ，ということです。
+弱い測定不変が成り立っているかは，
+引数<code>group.equal</code>に等値の制約を置く
+部分である<code>"loadings"</code>を指定します。
+
+```{r}
+rslt_weak <- cfa(mdl_wisc3,
+  sample.cov = lst_cov, sample.nobs = lst_n, sample.mean = lst_mean,
+  meanstructure = TRUE, group.equal = "loadings", std.lv = TRUE)
+summary(rslt_weak, fit.measures = TRUE)
+```
+
+出力には<code>Group 1 [manic]:</code>と
+<code>Group 2 [base]:</code>という表示がみられ，
+因子負荷量には<code>(.p2.)</code>のように同じラベルが
+付与されていることがわかります。
+
+CFIやRMSEAなどから，因子負荷量に等値の制約を置いても
+適合はよいものと考えられます。
+
+同じ因子を測定していると考えられるため，今度は
+切片が等しいかを確認します（強い測定不変）。
+これにより，
+因子平均の差を検討することが可能になります
+（平均に違いがあれば，それは観測変数レベルではなく因子レベルでの違い）。
+
+強い測定不変の制約は，弱い制約に<code>"intercepts"</code>を加えます。
+```{r}
+rslt_strong <- cfa(mdl_wisc3,
+  sample.cov = lst_cov, sample.nobs = lst_n, sample.mean = lst_mean,
+  meanstructure = TRUE, std.lv = TRUE, 
+  group.equal = c("loadings", "intercepts"))
+fitMeasures(rslt_strong, vec_fit)
+```
+
+RMSEAの値が悪く，積極的には強い測定不変の成立を主張できない可能性があります。そこでここでは，弱い測定不変性より部分的に強い測定不変性の可能性を検討しましょう。
+
+等値制約に対しては関数<code>modindices()</code>
+が使えず，代わりに<code>lavTestScore()</code>
+を使うように促されます。
+
+```{r}
+lavTestScore(rslt_strong)
+```
+
+この検定では，等値の制約を外したときに尤度の改善がみられるかを確認します。$\chi^2$値が最も大きい<code>.p21.</code>は，出力から確認すると<code>Verval2</code>
+の切片です。そこで，この切片のみ集団間での等値の制約を引数<code>group.partial</code>で外します。
+切片の表現は<code>~1</code>です。
+
+```{r, eval = TRUE}
+rslt_p_strong <- cfa(mdl_wisc3,
+  sample.cov = lst_cov, sample.nobs = lst_n, sample.mean = lst_mean,
+  meanstructure = TRUE, std.lv = TRUE,
+  group.equal = c("loadings", "intercepts"),
+  group.partial = c("Verval2 ~1"))
+```
+
+弱い測定不変と強い測定不変の間にあるはずの部分的な
+強い測定不変の適合をパッケージ<code>semTools</code>の関数<code>compareFit</code>で比較します。
+
+```{r, eval = FALSE}
+require(semTools)
+summary(compareFit(rslt_weak, rslt_p_strong, rslt_strong))
+```
+
+ここまでで強い測定不変性を確認できた，と考えます。
+あとは，厳密な測定不変が成り立つか，さらに**因子の分散共分散の等質性**の成立，**因子平均の等質性**の確認ができるかの検討に進みます。最後のモデルが許容されたら，集団間に違いはないと考えることができます。
+
+```{r}
+# 厳格な測定不変
+rslt_strict <- cfa(mdl_wisc3,
+  sample.cov = lst_cov, sample.nobs = lst_n, sample.mean = lst_mean, meanstructure = TRUE,
+  std.lv = TRUE, group.equal = c("loadings", "intercepts", "residuals"),
+  group.partial = "Verbal2 ~1")
+# 共通因子の分散共分散
+rslt_cov_lv <- cfa(mdl_wisc3,
+  sample.cov = lst_cov, sample.nobs = lst_n, sample.mean = lst_mean, meanstructure = TRUE,
+  std.lv = TRUE, group.equal = c("loadings", "intercepts", "residuals", "lv.variances", "lv.covariances"))
+# 因子得点の平均
+rslt_mean_lv <- cfa(mdl_wisc3,
+  sample.cov = lst_cov, sample.nobs = lst_n, sample.mean = lst_mean, meanstructure = TRUE,
+  std.lv = TRUE, group.equal = c("loadings", "intercepts", "residuals", "lv.variances", "lv.covariances", "means"))
+# 因子得点の平均
+rslt_mean_lv <- cfa(mdl_wisc3,
+  sample.cov = lst_cov, sample.nobs = lst_n, sample.mean = lst_mean, meanstructure = TRUE,
+  std.lv = TRUE, group.equal = c("loadings", "intercepts", "residuals", "lv.variances", "lv.covariances", "means"))
+# モデルの比較
+summary(semTools::compareFit(rslt_base, rslt_weak, rslt_p_strong, rslt_strong, rslt_strict, rslt_cov_lv, rslt_mean_lv))
+```
